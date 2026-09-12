@@ -149,7 +149,7 @@ export default function WelcomeScreen({
                 <BookOpen size={22} className="text-white" />
               </div>
               <div className="text-left rtl:text-right min-w-0">
-                <div className={`font-bold text-sm sm:text-base leading-tight text-white truncate ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`}>
+                <div className={`font-bold text-sm sm:text-base text-white ${lang === 'urdu' ? 'font-urdu leading-normal py-0.5' : 'leading-tight truncate'}`}>
                   {lang === 'urdu' ? 'مطالعہ جاری رکھیں' : lang === 'hindi' ? 'अध्ययन जारी रखें' : 'Continue Reading'}
                 </div>
                 <div className="text-[11px] sm:text-xs text-emerald-200 font-medium truncate mt-0.5" dir="ltr">
@@ -183,10 +183,10 @@ export default function WelcomeScreen({
           >
             {/* Top row: Title + Completion % */}
             <div className="flex items-center justify-between mb-2 text-xs sm:text-sm">
-              <span className={`font-bold ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-main)' }}>
+              <span className={`font-bold ${lang === 'urdu' ? 'font-urdu py-0.5 leading-normal text-sm' : ''}`} style={{ color: 'var(--text-main)' }}>
                 {lang === 'urdu' ? 'آپ کا مطالعہ پیشرفت' : lang === 'hindi' ? 'आपकी अध्ययन प्रगति' : 'Your Reading Progress'}
               </span>
-              <span className="font-bold font-mono text-emerald-700 dark:text-emerald-400" dir="ltr" style={{ color: 'var(--primary)' }}>
+              <span className={`font-bold font-mono text-emerald-700 dark:text-emerald-400 ${lang === 'urdu' ? 'font-urdu' : ''}`} dir="ltr" style={{ color: 'var(--primary)' }}>
                 {completionPercentage}% {lang === 'urdu' ? 'مکمل' : lang === 'hindi' ? 'पूर्ण' : 'Completed'}
               </span>
             </div>
@@ -211,45 +211,45 @@ export default function WelcomeScreen({
               style={{ borderColor: 'var(--border-subtle)' }}
             >
               {/* 1. Pages Read */}
-              <div className="flex flex-col items-center justify-center text-center px-1">
+              <div className="flex flex-col items-center justify-center text-center px-1 overflow-visible">
                 <BookOpen size={16} strokeWidth={2} style={{ color: 'var(--text-muted)' }} />
                 <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full font-mono" dir="ltr" style={{ color: 'var(--text-main)' }}>
                   {pagesReadCount}/{totalPages}
                 </span>
-                <span className={`text-[10px] mt-0.5 truncate max-w-full ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-muted)' }}>
+                <span className={`text-[10px] mt-0.5 max-w-full overflow-visible ${lang === 'urdu' ? 'font-urdu leading-normal text-[11px] py-0.5' : 'truncate'}`} style={{ color: 'var(--text-muted)' }}>
                   {lang === 'urdu' ? 'صفحات' : lang === 'hindi' ? 'पृष्ठ' : 'Pages'}
                 </span>
               </div>
 
               {/* 2. Chapters */}
-              <div className="flex flex-col items-center justify-center text-center px-1">
+              <div className="flex flex-col items-center justify-center text-center px-1 overflow-visible">
                 <Layers size={16} strokeWidth={2} style={{ color: 'var(--text-muted)' }} />
                 <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full font-mono" dir="ltr" style={{ color: 'var(--text-main)' }}>
                   {completedChaptersCount}/{totalChapters}
                 </span>
-                <span className={`text-[10px] mt-0.5 truncate max-w-full ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-muted)' }}>
+                <span className={`text-[10px] mt-0.5 max-w-full overflow-visible ${lang === 'urdu' ? 'font-urdu leading-normal text-[11px] py-0.5' : 'truncate'}`} style={{ color: 'var(--text-muted)' }}>
                   {lang === 'urdu' ? 'ابواب' : lang === 'hindi' ? 'अध्याय' : 'Chapters'}
                 </span>
               </div>
 
               {/* 3. Reading Time */}
-              <div className="flex flex-col items-center justify-center text-center px-1">
+              <div className="flex flex-col items-center justify-center text-center px-1 overflow-visible">
                 <Clock size={16} strokeWidth={2} style={{ color: 'var(--text-muted)' }} />
                 <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full font-mono" dir="ltr" style={{ color: 'var(--text-main)' }}>
                   {readingTimeText}
                 </span>
-                <span className={`text-[10px] mt-0.5 truncate max-w-full ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-muted)' }}>
+                <span className={`text-[10px] mt-0.5 max-w-full overflow-visible ${lang === 'urdu' ? 'font-urdu leading-normal text-[11px] py-0.5' : 'truncate'}`} style={{ color: 'var(--text-muted)' }}>
                   {lang === 'urdu' ? 'مطالعہ وقت' : lang === 'hindi' ? 'समय' : 'Time'}
                 </span>
               </div>
 
               {/* 4. Completed */}
-              <div className="flex flex-col items-center justify-center text-center px-1">
+              <div className="flex flex-col items-center justify-center text-center px-1 overflow-visible">
                 <Target size={16} strokeWidth={2} style={{ color: 'var(--text-muted)' }} />
                 <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full font-mono" dir="ltr" style={{ color: 'var(--text-main)' }}>
                   {completionPercentage}%
                 </span>
-                <span className={`text-[10px] mt-0.5 truncate max-w-full ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-muted)' }}>
+                <span className={`text-[10px] mt-0.5 max-w-full overflow-visible ${lang === 'urdu' ? 'font-urdu leading-normal text-[11px] py-0.5' : 'truncate'}`} style={{ color: 'var(--text-muted)' }}>
                   {lang === 'urdu' ? 'مکمل' : lang === 'hindi' ? 'पूर्ण' : 'Progress'}
                 </span>
               </div>
@@ -260,7 +260,7 @@ export default function WelcomeScreen({
         {/* 6 Key Interactive Tools Section */}
         <div className="mt-6 w-full max-w-[340px] sm:max-w-[380px]">
           <div className="flex items-center justify-between mb-3 px-1">
-            <h2 className={`text-xs sm:text-sm font-bold ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--primary)' }}>
+            <h2 className={`text-xs sm:text-sm font-bold ${lang === 'urdu' ? 'font-urdu py-1 leading-relaxed text-sm' : ''}`} style={{ color: 'var(--primary)' }}>
               {lang === 'urdu' ? 'ایپ کے اہم علمی و دینی فیچرز' : lang === 'hindi' ? 'ऐप की मुख्य विशेषताएं व टूल्स' : 'Key Features & Learning Tools'}
             </h2>
             <span className="text-[11px] font-medium" style={{ color: 'var(--text-muted)' }}>
@@ -278,24 +278,26 @@ export default function WelcomeScreen({
                   key={feat.id}
                   type="button"
                   onClick={() => onNavigateTab && onNavigateTab(feat.id)}
-                  className="flex flex-col items-start p-3 rounded-2xl border text-left rtl:text-right transition-all hover:scale-[1.02] active:scale-95 shadow-xs group cursor-pointer"
+                  className="flex flex-col items-start p-3 rounded-2xl border text-left rtl:text-right transition-all hover:scale-[1.02] active:scale-95 shadow-xs group cursor-pointer min-h-[110px] justify-between"
                   style={{ 
                     backgroundColor: 'var(--bg-surface)', 
                     borderColor: 'var(--border-subtle)' 
                   }}
                 >
                   <div 
-                    className="w-9 h-9 rounded-xl flex items-center justify-center mb-2.5 transition-transform group-hover:scale-110"
+                    className="w-9 h-9 rounded-xl flex items-center justify-center mb-1.5 transition-transform group-hover:scale-110 flex-shrink-0"
                     style={{ backgroundColor: feat.bg, color: feat.color }}
                   >
                     <Icon size={18} strokeWidth={2.2} />
                   </div>
-                  <h3 className={`text-xs font-bold leading-tight truncate w-full ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-main)' }}>
-                    {title}
-                  </h3>
-                  <p className={`text-[10px] truncate w-full mt-1 ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-muted)' }}>
-                    {desc}
-                  </p>
+                  <div className="w-full flex-1 flex flex-col justify-center overflow-visible">
+                    <h3 className={`text-xs font-bold leading-normal w-full overflow-visible ${lang === 'urdu' ? 'font-urdu py-0.5 text-[13px]' : 'truncate'}`} style={{ color: 'var(--text-main)' }}>
+                      {title}
+                    </h3>
+                    <p className={`text-[10px] w-full mt-0.5 overflow-visible ${lang === 'urdu' ? 'font-urdu leading-normal text-[11px] py-0.5' : 'truncate'}`} style={{ color: 'var(--text-muted)' }}>
+                      {desc}
+                    </p>
+                  </div>
                 </button>
               );
             })}

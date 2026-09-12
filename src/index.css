@@ -32,7 +32,7 @@
 
 .font-urdu {
   font-family: var(--font-urdu);
-  line-height: 1.6;
+  line-height: 1.9;
 }
 
 .font-hindi {
@@ -110,8 +110,24 @@ body {
 /* Typography styles */
 .font-urdu {
   font-family: var(--font-urdu);
-  line-height: 2.1;
+  line-height: 1.95;
   letter-spacing: 0;
+}
+
+/* Ensure Urdu text ascenders and descenders (nuqtas) are never clipped */
+.font-urdu,
+[dir="rtl"] .font-urdu {
+  overflow-wrap: break-word;
+}
+
+[dir="rtl"] h1.font-urdu,
+[dir="rtl"] h2.font-urdu,
+[dir="rtl"] h3.font-urdu,
+[dir="rtl"] h4.font-urdu,
+[dir="rtl"] p.font-urdu,
+[dir="rtl"] span.font-urdu {
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 .font-hindi {
