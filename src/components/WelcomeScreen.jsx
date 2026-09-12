@@ -5,12 +5,7 @@ import {
   Clock, 
   Target, 
   ArrowRight, 
-  ArrowLeft,
-  HelpCircle,
-  Heart,
-  BarChart3,
-  Star,
-  ChevronRight
+  ArrowLeft 
 } from 'lucide-react';
 import { BOOK_METADATA } from '../data/bookData';
 
@@ -38,117 +33,25 @@ export default function WelcomeScreen({
   const mins = totalMinutes % 60;
   const readingTimeText = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
 
-  const features = [
-    {
-      id: 'chapters',
-      titleUrdu: 'ابواب کی فہرست',
-      titleHindi: 'अध्याय सूची',
-      titleEnglish: 'Chapters Guide',
-      subtitleUrdu: 'تفصیلی فہارس و جائزہ',
-      subtitleHindi: 'विस्तृत अध्याय और विवरण',
-      subtitleEnglish: 'Detailed chapters and overview',
-      icon: Layers,
-      color: '#065f46' // dark green
-    },
-    {
-      id: 'quiz',
-      titleUrdu: 'سیرت کوئز',
-      titleHindi: 'सीरत क्विज़',
-      titleEnglish: 'Seerat Quiz',
-      subtitleUrdu: 'معلومات کا امتحان',
-      subtitleHindi: 'ज्ञान की परीक्षा',
-      subtitleEnglish: 'Test your knowledge',
-      icon: HelpCircle,
-      color: '#c25e00' // warm orange / amber
-    },
-    {
-      id: 'durood',
-      titleUrdu: 'روزانہ درود شریف',
-      titleHindi: 'दैनिक दुरूद शरीफ',
-      titleEnglish: 'Daily Salawat',
-      subtitleUrdu: 'آسانی سے درود بھیجیں',
-      subtitleHindi: 'आसानी से दुरूद भेजें',
-      subtitleEnglish: 'Send blessings easily',
-      icon: Heart,
-      color: '#064e3b' // forest green
-    },
-    {
-      id: 'progress',
-      titleUrdu: 'مطالعہ پیشرفت',
-      titleHindi: 'अध्ययन प्रगति',
-      titleEnglish: 'Reading Progress',
-      subtitleUrdu: 'اپنا سفر ٹریک کریں',
-      subtitleHindi: 'अपनी यात्रा ट्रैक करें',
-      subtitleEnglish: 'Track your journey',
-      icon: BarChart3,
-      color: '#064e3b' // forest green
-    }
-  ];
-
   return (
-    <div className="w-full flex flex-col items-center justify-center px-3 sm:px-4 pt-3 pb-24 sm:py-6 select-none welcome-dots-bg">
-      <div className="w-full max-w-[390px] sm:max-w-[440px] flex flex-col items-center text-center">
+    <div className="w-full flex flex-col items-center justify-center px-4 pt-3 pb-24 sm:py-6 select-none welcome-dots-bg">
+      <div className="w-full max-w-md flex flex-col items-center text-center">
         
-        {/* Horizontal Landscape Hero Card */}
+        {/* Iconic Opening Portrait Artwork Card */}
         <div 
-          className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-amber-500/30 transition-transform duration-300 hover:scale-[1.01]"
-          style={{ aspectRatio: '16/9', backgroundColor: '#fcf8ee' }}
+          className="relative w-full max-w-[340px] sm:max-w-[380px] rounded-[28px] overflow-hidden shadow-2xl border-[3px] transition-transform duration-300 hover:scale-[1.01]"
+          style={{ borderColor: 'var(--gold)', backgroundColor: 'var(--bg-surface)' }}
         >
           <img 
-            src="/hero-banner.jpg" 
-            alt="Aakhri Nabi Ki Pyari Seerat"
-            className="w-full h-full object-cover block"
+            src="/opening-cover.jpg" 
+            alt="Aakhri Nabi Ki Pyari Seerat - Opening Page"
+            className="w-full h-auto object-cover block"
             loading="eager"
           />
-
-          {/* Overlay Typography */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 py-2">
-            <h1 
-              className="text-xl sm:text-3xl font-extrabold tracking-tight"
-              style={{ 
-                fontFamily: "'Playfair Display', Georgia, serif", 
-                color: '#064e3b',
-                textShadow: '0 1px 4px rgba(255,255,255,0.95), 0 2px 8px rgba(255,255,255,0.7)'
-              }}
-            >
-              aakhri Nabi Ki
-            </h1>
-            <h2 
-              className="text-xl sm:text-3xl font-serif font-bold -mt-0.5"
-              style={{ 
-                fontFamily: "'Playfair Display', Georgia, serif",
-                color: '#b45309',
-                textShadow: '0 1px 4px rgba(255,255,255,0.95), 0 2px 8px rgba(255,255,255,0.7)'
-              }}
-            >
-              pyari seerat
-            </h2>
-
-            {/* Ornamental Star */}
-            <div className="text-[10px] text-[#065f46] my-1">
-              ✦
-            </div>
-
-            <div className="text-[10px] sm:text-[11px] font-bold tracking-widest text-[#065f46] uppercase">
-              ILM • ISHQ • AMAL
-            </div>
-
-            <p className="text-[11px] sm:text-xs italic font-serif text-gray-800 mt-1 font-medium" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.9)' }}>
-              “A life of mercy for all humanity”
-            </p>
-
-            <div className="mt-2 flex items-center gap-2">
-              <span className="h-px w-6 bg-emerald-900/30" />
-              <span className="text-[9px] sm:text-[10px] font-mono tracking-widest text-[#064e3b] font-bold uppercase" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.9)' }}>
-                DEVELOPED BY MOHAMMAD ASIM
-              </span>
-              <span className="h-px w-6 bg-emerald-900/30" />
-            </div>
-          </div>
         </div>
 
         {/* Continue Reading Pill Button */}
-        <div className="mt-3.5 w-full">
+        <div className="mt-4 w-full max-w-[340px] sm:max-w-[380px]">
           <button
             onClick={onStartReading}
             className="w-full py-3.5 px-5 rounded-full text-white flex items-center justify-between shadow-lg transition-transform hover:scale-[1.01] active:scale-[0.98] group"
@@ -183,7 +86,7 @@ export default function WelcomeScreen({
         </div>
 
         {/* Your Progress Section Card */}
-        <div className="mt-3.5 w-full">
+        <div className="mt-3.5 w-full max-w-[340px] sm:max-w-[380px]">
           <div 
             onClick={() => onNavigateTab && onNavigateTab('progress')}
             className="w-full rounded-2xl p-4 border shadow-xs transition-all hover:border-emerald-500/40 cursor-pointer text-left rtl:text-right"
@@ -265,74 +168,6 @@ export default function WelcomeScreen({
                 </span>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Key Features & Interactive Tools (2x2 Grid matching screenshot) */}
-        <div className="mt-5 w-full">
-          <div className="flex items-center justify-between mb-2.5 px-1">
-            <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm" style={{ color: 'var(--primary)' }}>
-              <Star size={15} className="text-emerald-700 dark:text-emerald-400" />
-              <span>{lang === 'urdu' ? 'ایپ کے اہم فیچرز' : lang === 'hindi' ? 'ऐप की मुख्य विशेषताएं' : 'Key Features & Interactive Tools'}</span>
-            </div>
-            <span className="text-[11px] font-medium" style={{ color: 'var(--text-muted)' }}>
-              {totalPages} {lang === 'english' ? 'Pages' : lang === 'hindi' ? 'पृष्ठ' : 'صفحات'}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2.5 w-full">
-            {features.map((feat) => {
-              const Icon = feat.icon;
-              const title = lang === 'urdu' ? feat.titleUrdu : lang === 'hindi' ? feat.titleHindi : feat.titleEnglish;
-              const subtitle = lang === 'urdu' ? feat.subtitleUrdu : lang === 'hindi' ? feat.subtitleHindi : feat.subtitleEnglish;
-              return (
-                <button
-                  key={feat.id}
-                  onClick={() => onNavigateTab && onNavigateTab(feat.id)}
-                  className="flex items-center gap-2 p-2.5 rounded-2xl border text-left rtl:text-right transition-all hover:scale-[1.01] active:scale-[0.98] shadow-xs group w-full"
-                  style={{ 
-                    backgroundColor: 'var(--bg-surface)', 
-                    borderColor: 'var(--border-subtle)' 
-                  }}
-                >
-                  <div 
-                    className="w-10 h-10 rounded-xl flex items-center justify-center text-white flex-shrink-0 shadow-xs transition-transform group-hover:scale-105"
-                    style={{ backgroundColor: feat.color }}
-                  >
-                    <Icon size={18} strokeWidth={2.2} />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="text-xs font-bold truncate leading-tight" style={{ color: 'var(--text-main)' }}>
-                      {title}
-                    </h3>
-                    <p className="text-[10px] truncate mt-0.5 leading-tight" style={{ color: 'var(--text-muted)' }}>
-                      {subtitle}
-                    </p>
-                  </div>
-                  <ChevronRight size={14} className="text-gray-300 dark:text-gray-600 flex-shrink-0 group-hover:translate-x-0.5 transition-transform" />
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Inspirational Hadith / Quote Card */}
-          <div 
-            className="mt-4 p-3.5 rounded-2xl border text-center shadow-xs"
-            style={{ 
-              backgroundColor: 'rgba(6, 95, 70, 0.05)', 
-              borderColor: 'rgba(6, 95, 70, 0.15)' 
-            }}
-          >
-            <p className="italic font-serif text-emerald-950 dark:text-emerald-200 text-xs sm:text-sm leading-relaxed">
-              {lang === 'urdu'
-                ? '”تم میں سے بہترین وہ ہے جو قرآن اور میری سیرت سیکھے اور دوسروں کو سکھائے۔“'
-                : lang === 'hindi'
-                ? '“तुम में से सबसे बेहतरीन वो है जो मेरे बारे में सीखे और दूसरों को सिखाए।”'
-                : '“The best among you are those who learn about me and teach others.”'}
-            </p>
-            <p className="text-[11px] font-medium text-emerald-800/80 dark:text-emerald-400 mt-1">
-              {lang === 'urdu' ? '— رسول اللہ ﷺ —' : lang === 'hindi' ? '— पैगंबर मुहम्मद ﷺ —' : '— Prophet Muhammad ﷺ —'}
-            </p>
           </div>
         </div>
 
