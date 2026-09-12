@@ -253,7 +253,7 @@ export default function App() {
       )}
 
       {/* Main App Content Body */}
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 flex flex-col pb-16 sm:pb-0">
         {activeTab === 'reader' && (
           <BookReader
             currentPage={currentPage}

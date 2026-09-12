@@ -2,7 +2,7 @@
 // Developed by Mohammad Asim
 // Version: 1.0.0
 
-const CACHE_NAME = 'seerat-app-shell-v1';
+const CACHE_NAME = 'seerat-app-shell-v2';
 const PAGES_CACHE = 'seerat-book-pages-v1';
 
 const STATIC_ASSETS = [
@@ -52,7 +52,25 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 1. Book Pages: Cache-First with automatic background caching
+  // 1. Navigation (HTML): Network-First with offline cache fallback
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const clone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          return caches.match(request).then((cached) => cached || caches.match('/index.html') || caches.match('/'));
+        })
+    );
+    return;
+  }
+
+  // 2. Book Pages: Cache-First with automatic background caching
   if (url.pathname.includes('/books/')) {
     event.respondWith(
       caches.open(PAGES_CACHE).then((cache) => {
@@ -66,7 +84,6 @@ self.addEventListener('fetch', (event) => {
             }
             return networkResponse;
           }).catch(() => {
-            // Return placeholder or fail gracefully when offline
             return cachedResponse || new Response('Offline Page Image', { status: 503 });
           });
         });
@@ -75,7 +92,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 2. Google Fonts & CDNs: Cache-First
+  // 3. Google Fonts & CDNs: Cache-First
   if (url.origin.includes('fonts.googleapis.com') || url.origin.includes('fonts.gstatic.com')) {
     event.respondWith(
       caches.open(CACHE_NAME).then((cache) => {
@@ -93,27 +110,17 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 3. Navigation & Assets: Stale-While-Revalidate with offline fallback
+  // 4. Vite Assets & JS/CSS: Network-First when online, fallback to Cache
   event.respondWith(
-    caches.match(request).then((cachedResponse) => {
-      const fetchPromise = fetch(request).then((networkResponse) => {
+    fetch(request)
+      .then((networkResponse) => {
         if (networkResponse && networkResponse.status === 200) {
-          const responseClone = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(request, responseClone);
-          });
+          const clone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
         }
         return networkResponse;
-      }).catch(() => {
-        // If navigation request fails offline, fallback to /index.html
-        if (request.mode === 'navigate') {
-          return caches.match('/index.html') || caches.match('/');
-        }
-        return cachedResponse;
-      });
-
-      return cachedResponse || fetchPromise;
-    })
+      })
+      .catch(() => caches.match(request))
   );
 });
 

@@ -198,36 +198,36 @@ export default function BookReader({
       ref={containerRef}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="reader-container flex flex-col items-center justify-between min-h-[calc(100vh-140px)] w-full select-none pb-16 sm:pb-0"
+      className="reader-container flex flex-col items-center justify-between min-h-[calc(100vh-140px)] w-full select-none pb-20 sm:pb-0"
     >
       {/* Top Chapter Status Bar */}
       <div 
-        className="w-full border-b px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-sm z-10 glass"
+        className="w-full border-b px-2.5 sm:px-4 py-1.5 sm:py-2 flex items-center justify-between gap-1.5 sm:gap-2 text-sm z-10 glass"
         style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--bg-surface)' }}
       >
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 min-w-0 flex-1">
           <button 
             onClick={() => onSelectChapter?.(currentChapter?.id || 1)}
-            className="flex items-center gap-1.5 px-3 py-1 rounded-lg border text-xs font-semibold hover:border-emerald-500 transition-colors"
+            className="flex items-center gap-1 px-2 sm:px-3 py-1 rounded-lg border text-xs font-semibold hover:border-emerald-500 transition-colors flex-shrink-0"
             style={{ backgroundColor: 'var(--bg-surface-elevated)', borderColor: 'var(--border-color)' }}
           >
             <Layers size={14} style={{ color: 'var(--primary)' }} />
-            <span>{getChapterNumber() || 'Table of Contents'}</span>
+            <span className="truncate max-w-[120px] sm:max-w-none">{getChapterNumber() || 'Contents'}</span>
           </button>
 
           {currentChapter && (
-            <span className={`text-xs font-medium truncate max-w-[150px] sm:max-w-md ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-main)' }}>
+            <span className={`text-xs font-medium truncate max-w-[100px] xs:max-w-[150px] sm:max-w-md ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-main)' }}>
               {getChapterTitle()}
             </span>
           )}
         </div>
 
         {/* Action controls */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
           {/* Mark As Read Button */}
           <button
             onClick={() => onTogglePageRead(currentPage)}
-            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-all ${
+            className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border text-xs font-medium transition-all ${
               isCurrentRead ? 'shadow-xs font-bold' : ''
             }`}
             style={{
@@ -237,14 +237,14 @@ export default function BookReader({
             }}
             title="Mark page as completed"
           >
-            <CheckCircle2 size={15} className={isCurrentRead ? 'text-emerald-600' : ''} />
+            <CheckCircle2 size={14} className={isCurrentRead ? 'text-emerald-600' : ''} />
             <span className="hidden xs:inline">{isCurrentRead ? (lang === 'english' ? 'Read' : 'پڑھ لیا') : (lang === 'english' ? 'Mark Read' : 'پڑھیں')}</span>
           </button>
 
           {/* Bookmark Toggle */}
           <button
             onClick={() => onToggleBookmark(currentPage)}
-            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-all ${
+            className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border text-xs font-medium transition-all ${
               isCurrentBookmarked ? 'shadow-xs font-bold' : ''
             }`}
             style={{
@@ -253,7 +253,7 @@ export default function BookReader({
               color: isCurrentBookmarked ? 'var(--gold-hover)' : 'var(--text-muted)'
             }}
           >
-            {isCurrentBookmarked ? <BookmarkCheck size={15} /> : <Bookmark size={15} />}
+            {isCurrentBookmarked ? <BookmarkCheck size={14} /> : <Bookmark size={14} />}
             <span className="hidden sm:inline">{isCurrentBookmarked ? 'محفوظ' : 'بک مارک'}</span>
           </button>
 
@@ -444,7 +444,7 @@ export default function BookReader({
 
       {/* Bottom Page Navigation & Scrub Slider */}
       <div 
-        className="w-full border-t px-3 sm:px-4 py-2.5 sm:py-3 glass flex flex-wrap items-center justify-between gap-3 z-10"
+        className="w-full border-t px-3 sm:px-4 py-2 sm:py-2.5 glass flex flex-wrap items-center justify-between gap-2.5 sm:gap-3 z-10 mb-14 sm:mb-0"
         style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--bg-surface)' }}
       >
         {/* Scrub Slider */}

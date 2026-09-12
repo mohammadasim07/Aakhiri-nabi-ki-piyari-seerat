@@ -48,11 +48,22 @@ export default function MobileBottomNav({
 
   return (
     <nav 
-      className="fixed bottom-0 left-0 right-0 z-40 border-t glass px-2 py-1 flex items-center justify-around sm:hidden transition-all"
+      className="mobile-bottom-dock sm:hidden"
       style={{ 
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        width: '100%',
+        zIndex: 50,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-around',
         borderColor: 'var(--border-color)', 
         backgroundColor: 'var(--bg-surface)',
-        paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))'
+        paddingTop: '6px',
+        paddingBottom: 'max(8px, env(safe-area-inset-bottom))',
+        boxShadow: '0 -4px 16px rgba(0, 0, 0, 0.08)'
       }}
     >
       {items.map((item) => {
@@ -63,21 +74,43 @@ export default function MobileBottomNav({
           <button
             key={item.id}
             onClick={() => setActiveTab(item.id)}
-            className="flex-1 flex flex-col items-center justify-center py-1 relative active:scale-95 transition-transform"
-            style={{ color: isActive ? 'var(--primary)' : 'var(--text-muted)' }}
+            className="flex-1 flex flex-col items-center justify-center py-1 relative active:scale-95 transition-all"
+            style={{ 
+              color: isActive ? 'var(--primary)' : 'var(--text-muted)',
+              minWidth: 0
+            }}
           >
             <div className="relative">
-              <Icon size={20} strokeWidth={isActive ? 2.5 : 2} style={{ color: isActive ? 'var(--primary)' : 'currentColor' }} />
+              <div 
+                className="p-1 rounded-xl transition-all"
+                style={{ 
+                  backgroundColor: isActive ? 'rgba(6, 95, 70, 0.12)' : 'transparent',
+                }}
+              >
+                <Icon 
+                  size={20} 
+                  strokeWidth={isActive ? 2.5 : 1.9} 
+                  style={{ color: isActive ? 'var(--primary)' : 'currentColor' }} 
+                />
+              </div>
               {item.badge && (
                 <span 
-                  className="absolute -top-1.5 -right-3 text-[9px] font-mono font-bold px-1 rounded-full text-white shadow-xs"
-                  style={{ backgroundColor: 'var(--gold)' }}
+                  className="absolute text-[9px] font-mono font-bold px-1 rounded-full text-white shadow-xs"
+                  style={{ 
+                    backgroundColor: 'var(--gold)',
+                    top: '-3px',
+                    right: '-7px',
+                    lineHeight: '13px'
+                  }}
                 >
                   {item.badge}
                 </span>
               )}
             </div>
-            <span className={`text-[10px] mt-0.5 ${isActive ? 'font-bold' : 'font-medium'} ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`}>
+            <span 
+              className={`text-[10px] mt-0.5 truncate max-w-full ${isActive ? 'font-bold' : 'font-medium'} ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`}
+              style={{ color: isActive ? 'var(--primary)' : 'var(--text-muted)' }}
+            >
               {label}
             </span>
           </button>
