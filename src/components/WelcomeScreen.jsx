@@ -34,7 +34,7 @@ export default function WelcomeScreen({
   const readingTimeText = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
 
   return (
-    <div className="w-full flex flex-col items-center justify-center px-4 py-3 sm:py-6 select-none welcome-dots-bg">
+    <div className="w-full flex flex-col items-center justify-center px-4 pt-3 pb-24 sm:py-6 select-none welcome-dots-bg">
       <div className="w-full max-w-md flex flex-col items-center text-center">
         
         {/* Opening Poster Card */}
@@ -127,7 +127,7 @@ export default function WelcomeScreen({
               {/* 1. Pages Read */}
               <div className="flex flex-col items-center justify-center text-center px-1">
                 <BookOpen size={18} strokeWidth={1.8} style={{ color: 'var(--text-muted)' }} />
-                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full" style={{ color: 'var(--text-main)' }}>
+                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full" dir="ltr" style={{ color: 'var(--text-main)' }}>
                   {pagesReadCount} / {totalPages}
                 </span>
                 <span className="text-[10px] mt-0.5 truncate max-w-full" style={{ color: 'var(--text-muted)' }}>
@@ -138,7 +138,7 @@ export default function WelcomeScreen({
               {/* 2. Chapters */}
               <div className="flex flex-col items-center justify-center text-center px-1">
                 <Layers size={18} strokeWidth={1.8} style={{ color: 'var(--text-muted)' }} />
-                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full" style={{ color: 'var(--text-main)' }}>
+                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full" dir="ltr" style={{ color: 'var(--text-main)' }}>
                   {completedChaptersCount} / {totalChapters}
                 </span>
                 <span className="text-[10px] mt-0.5 truncate max-w-full" style={{ color: 'var(--text-muted)' }}>
@@ -149,7 +149,7 @@ export default function WelcomeScreen({
               {/* 3. Reading Time */}
               <div className="flex flex-col items-center justify-center text-center px-1">
                 <Clock size={18} strokeWidth={1.8} style={{ color: 'var(--text-muted)' }} />
-                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full" style={{ color: 'var(--text-main)' }}>
+                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full" dir="ltr" style={{ color: 'var(--text-main)' }}>
                   {readingTimeText}
                 </span>
                 <span className="text-[10px] mt-0.5 truncate max-w-full" style={{ color: 'var(--text-muted)' }}>
@@ -160,7 +160,7 @@ export default function WelcomeScreen({
               {/* 4. Completed */}
               <div className="flex flex-col items-center justify-center text-center px-1">
                 <Target size={18} strokeWidth={1.8} style={{ color: 'var(--text-muted)' }} />
-                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full" style={{ color: 'var(--text-main)' }}>
+                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full" dir="ltr" style={{ color: 'var(--text-main)' }}>
                   {completionPercentage}%
                 </span>
                 <span className="text-[10px] mt-0.5 truncate max-w-full" style={{ color: 'var(--text-muted)' }}>
