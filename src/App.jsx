@@ -393,6 +393,8 @@ export default function App() {
         isOpen={isDownloadOpen}
         onClose={() => setIsDownloadOpen(false)}
         lang={lang}
+        canInstall={!!deferredInstallPrompt}
+        onInstallApp={handleInstallApp}
       />
     </div>
   );

@@ -148,18 +148,6 @@ export default function Header({
               </span>
             )}
 
-            {/* Install PWA App Button */}
-            {canInstall && (
-              <button
-                onClick={onInstallApp}
-                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold text-white shadow-xs transition-opacity hover:opacity-90"
-                style={{ backgroundColor: 'var(--primary)' }}
-                title="Install App on Device / موبائل یا کمپیوٹر پر ایپ انسٹال کریں"
-              >
-                <Smartphone size={11} /> <span className="hidden xs:inline">{lang === 'english' ? 'Install' : 'انسٹال'}</span>
-              </button>
-            )}
-
             {/* Bookmarks Counter */}
             <button
               onClick={onOpenBookmarks}

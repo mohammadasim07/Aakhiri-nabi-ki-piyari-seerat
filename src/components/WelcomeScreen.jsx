@@ -170,33 +170,18 @@ export default function WelcomeScreen({
           </button>
         </div>
 
-        {/* App Utility Buttons: Install & Offline Downloads */}
-        <div className="mt-4 flex items-center justify-center gap-2.5 w-full max-w-md text-xs">
-          {canInstall && (
-            <button
-              onClick={onInstallApp}
-              className="flex-1 py-2 px-3 rounded-xl border font-semibold flex items-center justify-center gap-1.5 transition-all shadow-xs"
-              style={{ 
-                backgroundColor: 'var(--gold-light)', 
-                borderColor: 'var(--gold)',
-                color: 'var(--gold-hover)'
-              }}
-            >
-              <Smartphone size={15} />
-              <span>{lang === 'english' ? 'Install to Phone' : 'فون پر انسٹال کریں'}</span>
-            </button>
-          )}
-
+        {/* App Utility Buttons: Offline App & PDFs */}
+        <div className="mt-4 flex items-center justify-center w-full max-w-md text-xs">
           <button
             onClick={onOpenDownload}
-            className="flex-1 py-2 px-3 rounded-xl border font-semibold flex items-center justify-center gap-1.5 transition-all shadow-xs hover:border-emerald-500"
+            className="w-full py-2.5 px-4 rounded-xl border font-semibold flex items-center justify-center gap-2 transition-all shadow-xs hover:border-emerald-500"
             style={{ 
               backgroundColor: 'var(--bg-surface-elevated)', 
               borderColor: 'var(--border-color)',
               color: 'var(--text-main)'
             }}
           >
-            <Download size={15} style={{ color: 'var(--primary)' }} />
+            <Download size={16} style={{ color: 'var(--primary)' }} />
             <span>{lang === 'english' ? 'Offline App & PDFs' : 'آف لائن ڈیٹا اور PDFs'}</span>
           </button>
         </div>
