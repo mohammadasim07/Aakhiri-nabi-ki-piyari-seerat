@@ -134,14 +134,16 @@ export default function WelcomeScreen({
         </div>
 
         {/* Primary CTA: Continue Reading Pill Button */}
-        <div className="mt-4 w-full max-w-[350px] sm:max-w-[390px]">
+        <div className="mt-5 w-full max-w-[350px] sm:max-w-[390px]" style={{ marginTop: '18px' }}>
           <button
             onClick={onStartReading}
             type="button"
             className="w-full min-h-[76px] sm:min-h-[82px] py-4 px-5 sm:px-6 rounded-[28px] text-white flex items-center justify-between shadow-lg transition-all hover:scale-[1.01] active:scale-[0.98] group cursor-pointer"
             style={{ 
               background: 'linear-gradient(135deg, #064e3b 0%, #065f46 100%)',
-              boxShadow: '0 8px 24px rgba(6, 78, 59, 0.32)'
+              boxShadow: '0 6px 18px rgba(6, 78, 59, 0.22)',
+              borderRadius: '28px',
+              minHeight: '78px'
             }}
           >
             <div className="flex items-center gap-3.5 sm:gap-4 min-w-0 flex-1 overflow-visible">
@@ -171,8 +173,11 @@ export default function WelcomeScreen({
           </button>
         </div>
 
-        {/* Your Progress Section Card (Comfortable 20px gap below Continue Reading) */}
-        <div className="mt-5 w-full max-w-[350px] sm:max-w-[390px]">
+        {/* Your Progress Section Card (Distinct 26px gap below Continue Reading) */}
+        <div 
+          className="mt-7 w-full max-w-[350px] sm:max-w-[390px]"
+          style={{ marginTop: '26px' }}
+        >
           <div 
             onClick={() => onNavigateTab && onNavigateTab('progress')}
             className="w-full rounded-2xl p-4 border shadow-xs transition-all hover:border-emerald-500/40 cursor-pointer text-left rtl:text-right"
