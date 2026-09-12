@@ -125,51 +125,6 @@ export default function Header({
 
   return (
     <header className="sticky top-0 z-40 glass border-b transition-colors duration-200" style={{ borderColor: 'var(--border-color)' }}>
-      {/* Top Utility Bar */}
-      <div className="border-b" style={{ borderColor: 'var(--border-subtle)', backgroundColor: 'var(--bg-surface-elevated)' }}>
-        <div className="container mx-auto px-3 sm:px-4 py-1 flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full font-medium" style={{ backgroundColor: 'var(--gold-light)', color: 'var(--gold)' }}>
-              بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
-            </span>
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full font-medium border text-[11px] whitespace-nowrap" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-color)', color: 'var(--primary)' }}>
-              Developed by Mohammad Asim
-            </span>
-            <span className="hidden md:inline" style={{ color: 'var(--text-muted)' }}>
-              {getAuthor()}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-1.5 sm:gap-3">
-            {/* Offline Status Badge */}
-            {isOffline && (
-              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-medium bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
-                <WifiOff size={11} /> <span className="hidden xs:inline">{lang === 'english' ? 'Offline' : 'آف لائن'}</span>
-              </span>
-            )}
-
-            {/* Bookmarks Counter */}
-            <button
-              onClick={onOpenBookmarks}
-              className="flex items-center gap-1 px-1.5 sm:px-2 py-1 rounded hover:bg-black/5 dark:hover:bg-white/5 transition-colors relative text-xs"
-              title="Bookmarks / محفوظ صفحات"
-            >
-              <Bookmark size={14} style={{ color: 'var(--gold)' }} />
-              <span className="font-mono text-xs">{bookmarkCount > 0 ? bookmarkCount : ''}</span>
-            </button>
-
-            {/* Offline Storage & PDF Downloads */}
-            <button
-              onClick={onOpenDownload}
-              className="flex items-center gap-1 px-1.5 sm:px-2 py-1 rounded hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-xs"
-              title="Offline App Storage & Original PDFs (Urdu, Hindi, English)"
-            >
-              <Download size={14} />
-              <span className="hidden xs:inline">{lang === 'english' ? 'Offline / PDFs' : 'آف لائن'}</span>
-            </button>
-          </div>
-        </div>
-      </div>
 
       {/* Main Navigation Bar */}
       <div className="container mx-auto px-3 sm:px-4 py-2 sm:py-3">
