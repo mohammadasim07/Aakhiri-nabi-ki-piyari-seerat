@@ -119,17 +119,6 @@ export default function WelcomeScreen({
     <div className="w-full flex flex-col items-center justify-center px-4 pt-3 pb-24 sm:py-8 select-none">
       <div className="w-full max-w-md flex flex-col items-center text-center">
         
-        {/* Top Floating Developer Badge */}
-        <div className="mb-3 inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold shadow-xs border transition-all"
-          style={{
-            backgroundColor: 'var(--bg-surface-elevated)',
-            borderColor: 'var(--border-subtle)',
-            color: 'var(--primary)'
-          }}
-        >
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="tracking-wide">Developed by Mohammad Asim</span>
-        </div>
 
         {/* Iconic Opening Portrait Artwork Card */}
         <div 
