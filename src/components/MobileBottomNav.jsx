@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Layers, BarChart3, HelpCircle } from 'lucide-react';
+import { Sparkles, BookOpen, Layers, BarChart3, HelpCircle } from 'lucide-react';
 
 export default function MobileBottomNav({
   activeTab,
@@ -8,6 +8,13 @@ export default function MobileBottomNav({
   completionPercentage
 }) {
   const items = [
+    {
+      id: 'home',
+      labelUrdu: 'صفحہ اول',
+      labelHindi: 'कवर',
+      labelEnglish: 'Cover',
+      icon: Sparkles
+    },
     {
       id: 'reader',
       labelUrdu: 'مطالعہ',

@@ -2,13 +2,15 @@
 // Developed by Mohammad Asim
 // Version: 1.0.0
 
-const CACHE_NAME = 'seerat-app-shell-v2';
+const CACHE_NAME = 'seerat-app-shell-v3';
 const PAGES_CACHE = 'seerat-book-pages-v1';
 
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
+  '/app-logo.png',
+  '/opening-cover.jpg',
   '/icon-192.png',
   '/icon-512.png',
   '/books/urdu/page_1.jpg',

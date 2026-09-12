@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
+import WelcomeScreen from './components/WelcomeScreen';
 import BookReader from './components/BookReader';
 import ChapterGuide from './components/ChapterGuide';
 import TimelineView from './components/TimelineView';
@@ -21,7 +22,7 @@ import {
 } from './utils/progressTracker';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('reader');
+  const [activeTab, setActiveTab] = useState('home');
   
   // Stored states
   const [currentPage, setCurrentPage] = useState(() => {
@@ -254,6 +255,20 @@ export default function App() {
 
       {/* Main App Content Body */}
       <main className="flex-1 flex flex-col pb-16 sm:pb-0">
+        {activeTab === 'home' && (
+          <WelcomeScreen
+            onStartReading={() => setActiveTab('reader')}
+            currentPage={currentPage}
+            lang={lang}
+            setLang={setLang}
+            onNavigateTab={(tab) => setActiveTab(tab)}
+            completionPercentage={progressStats.percentage}
+            canInstall={!!deferredInstallPrompt}
+            onInstallApp={handleInstallApp}
+            onOpenDownload={() => setIsDownloadOpen(true)}
+          />
+        )}
+
         {activeTab === 'reader' && (
           <BookReader
             currentPage={currentPage}

@@ -45,6 +45,13 @@ export default function Header({
 
   const navItems = [
     { 
+      id: 'home', 
+      labelUrdu: 'صفحہ اول', 
+      labelHindi: 'मुख्य पृष्ठ', 
+      labelEnglish: 'Opening Page',
+      icon: Sparkles 
+    },
+    { 
       id: 'reader', 
       labelUrdu: 'کتاب کا مطالعہ', 
       labelHindi: 'किताब का अध्ययन', 
@@ -182,12 +189,13 @@ export default function Header({
         <div className="flex sm:hidden flex-col gap-2">
           {/* Row 1: Brand Title + Search + Theme */}
           <div className="flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2 min-w-0" onClick={() => setActiveTab('reader')}>
+            <div className="flex items-center gap-2 min-w-0 cursor-pointer" onClick={() => setActiveTab('home')}>
               <div 
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-white shadow-sm font-bold text-sm flex-shrink-0 cursor-pointer"
-                style={{ background: 'linear-gradient(135deg, var(--primary), var(--primary-hover))' }}
+                className="w-9 h-9 rounded-xl flex items-center justify-center shadow-sm flex-shrink-0 overflow-hidden border"
+                style={{ borderColor: 'var(--gold)', backgroundColor: 'var(--bg-surface)' }}
+                title="Opening Page / صفحہ اول"
               >
-                ﷺ
+                <img src="/app-logo.png" alt="App Logo" className="w-full h-full object-cover" />
               </div>
               <div className="min-w-0">
                 <h1 
@@ -285,11 +293,12 @@ export default function Header({
           {/* Title & Brand */}
           <div className="flex items-center gap-3">
             <div 
-              className="w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-md font-bold text-lg cursor-pointer"
-              style={{ background: 'linear-gradient(135deg, var(--primary), var(--primary-hover))' }}
-              onClick={() => setActiveTab('reader')}
+              className="w-11 h-11 rounded-xl flex items-center justify-center shadow-md cursor-pointer overflow-hidden border-2 flex-shrink-0 transition-transform hover:scale-105"
+              style={{ borderColor: 'var(--gold)', backgroundColor: 'var(--bg-surface)' }}
+              onClick={() => setActiveTab('home')}
+              title="Opening Page / صفحہ اول"
             >
-              ﷺ
+              <img src="/app-logo.png" alt="App Logo" className="w-full h-full object-cover" />
             </div>
             <div>
               <h1 
@@ -297,7 +306,7 @@ export default function Header({
                   lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''
                 }`}
                 style={{ color: 'var(--primary)' }}
-                onClick={() => setActiveTab('reader')}
+                onClick={() => setActiveTab('home')}
               >
                 {getTitle()}
               </h1>
