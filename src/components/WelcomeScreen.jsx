@@ -332,16 +332,13 @@ export default function WelcomeScreen({
             borderColor: 'var(--border-subtle)' 
           }}
         >
-          <div className="flex items-center justify-center gap-1.5 text-xs font-bold" style={{ color: 'var(--primary)' }}>
-            <span>🌸</span>
+          <div className="flex items-center justify-center text-xs font-bold tracking-wide" style={{ color: 'var(--primary)' }}>
             <span>Developed by Mohammad Asim</span>
           </div>
           <p className="text-[11px] mt-1" style={{ color: 'var(--text-muted)' }}>
             {lang === 'urdu' 
-              ? 'مبارک سیرتِ مصطفیٰ ﷺ کا ڈیجیٹل علمی ایڈیشن • مکتبۃ المدینہ' 
-              : lang === 'hindi' 
-              ? 'मुबारक सीरत-ए-मुस्तफ़ा ﷺ का डिजिटल अध्ययन संस्करण' 
-              : 'Digital Reading Edition of the Blessed Biography of Prophet Muhammad ﷺ'}
+              ? 'مواد بشکریہ: دعوتِ اسلامی (مکتبۃ المدینہ)' 
+              : 'Content provided by Dawat-e-Islami'}
           </p>
         </div>
 
