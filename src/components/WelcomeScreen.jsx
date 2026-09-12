@@ -102,46 +102,47 @@ export default function WelcomeScreen({
           />
 
           {/* Overlay Typography */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 py-2 bg-gradient-to-b from-white/10 via-transparent to-black/10">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 py-2">
             <h1 
-              className="text-lg sm:text-2xl font-extrabold tracking-tight"
+              className="text-xl sm:text-3xl font-extrabold tracking-tight"
               style={{ 
                 fontFamily: "'Playfair Display', Georgia, serif", 
                 color: '#064e3b',
-                textShadow: '0 1px 3px rgba(255,255,255,0.9)'
+                textShadow: '0 1px 4px rgba(255,255,255,0.95), 0 2px 8px rgba(255,255,255,0.7)'
               }}
             >
               aakhri Nabi Ki
             </h1>
             <h2 
-              className="text-lg sm:text-2xl font-serif font-bold -mt-1"
+              className="text-xl sm:text-3xl font-serif font-bold -mt-0.5"
               style={{ 
+                fontFamily: "'Playfair Display', Georgia, serif",
                 color: '#b45309',
-                textShadow: '0 1px 3px rgba(255,255,255,0.9)'
+                textShadow: '0 1px 4px rgba(255,255,255,0.95), 0 2px 8px rgba(255,255,255,0.7)'
               }}
             >
               pyari seerat
             </h2>
 
             {/* Ornamental Star */}
-            <div className="text-[9px] text-[#065f46] my-1">
+            <div className="text-[10px] text-[#065f46] my-1">
               ✦
             </div>
 
-            <div className="text-[9px] sm:text-[10px] font-bold tracking-widest text-[#065f46] uppercase">
+            <div className="text-[10px] sm:text-[11px] font-bold tracking-widest text-[#065f46] uppercase">
               ILM • ISHQ • AMAL
             </div>
 
-            <p className="text-[10px] sm:text-[11px] italic font-serif text-gray-700 dark:text-gray-800 mt-1">
+            <p className="text-[11px] sm:text-xs italic font-serif text-gray-800 mt-1 font-medium" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.9)' }}>
               “A life of mercy for all humanity”
             </p>
 
-            <div className="mt-1.5 flex items-center gap-2 opacity-85">
-              <span className="h-px w-5 bg-emerald-800/30" />
-              <span className="text-[8px] sm:text-[9px] font-mono tracking-widest text-[#064e3b] font-bold uppercase">
+            <div className="mt-2 flex items-center gap-2">
+              <span className="h-px w-6 bg-emerald-900/30" />
+              <span className="text-[9px] sm:text-[10px] font-mono tracking-widest text-[#064e3b] font-bold uppercase" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.9)' }}>
                 DEVELOPED BY MOHAMMAD ASIM
               </span>
-              <span className="h-px w-5 bg-emerald-800/30" />
+              <span className="h-px w-6 bg-emerald-900/30" />
             </div>
           </div>
         </div>

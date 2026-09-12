@@ -185,6 +185,7 @@ export default function Header({
 
           {/* Row 2: Segmented Language Switcher */}
           <div 
+            dir="ltr"
             className="flex items-center p-1 rounded-xl border text-xs font-semibold w-full shadow-xs"
             style={{ backgroundColor: 'var(--bg-surface-elevated)', borderColor: 'var(--border-color)' }}
           >
@@ -288,6 +289,7 @@ export default function Header({
           <div className="flex items-center gap-2.5 flex-shrink-0">
             {/* Trilingual & Dual Switcher */}
             <div 
+              dir="ltr"
               className="flex items-center p-1 rounded-xl border text-xs font-semibold shadow-xs"
               style={{ backgroundColor: 'var(--bg-surface-elevated)', borderColor: 'var(--border-color)' }}
             >
