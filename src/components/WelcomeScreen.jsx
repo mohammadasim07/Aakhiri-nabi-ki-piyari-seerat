@@ -5,7 +5,14 @@ import {
   Clock, 
   Target, 
   ArrowRight, 
-  ArrowLeft 
+  ArrowLeft,
+  Sparkles,
+  HelpCircle,
+  Compass,
+  Award,
+  Bookmark,
+  Share2,
+  Heart
 } from 'lucide-react';
 import { BOOK_METADATA } from '../data/bookData';
 
@@ -27,19 +34,106 @@ export default function WelcomeScreen({
   const completedChaptersCount = progressStats?.completedChaptersCount || 0;
   const totalChapters = progressStats?.totalChapters || 13;
 
-  // Format total reading time
+  // Reading time text
   const totalMinutes = readingStats?.totalMinutesRead || 15;
   const hours = Math.floor(totalMinutes / 60);
   const mins = totalMinutes % 60;
   const readingTimeText = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
 
+  const features = [
+    {
+      id: 'chapters',
+      titleUrdu: 'فہرست ابواب',
+      titleHindi: 'अध्याय सूची',
+      titleEnglish: 'Chapters Guide',
+      descUrdu: '۱۳ جامع ابواب اور عنوانات',
+      descHindi: '13 संपूर्ण अध्याय और विषय',
+      descEnglish: '13 comprehensive chapters',
+      icon: Layers,
+      color: '#065f46',
+      bg: 'rgba(6, 95, 70, 0.08)'
+    },
+    {
+      id: 'progress',
+      titleUrdu: 'مطالعہ پیشرفت',
+      titleHindi: 'अध्ययन प्रगति',
+      titleEnglish: 'Reading Progress',
+      descUrdu: 'تفصیلی شماریات اور ریکارڈ',
+      descHindi: 'विस्तृत आंकड़े और रिकॉर्ड',
+      descEnglish: 'Detailed stats and streak',
+      icon: Target,
+      color: '#0284c7',
+      bg: 'rgba(2, 132, 199, 0.08)'
+    },
+    {
+      id: 'durood',
+      titleUrdu: 'درود پاک تسبیح',
+      titleHindi: 'दुरूद शरीफ़ तस्बीह',
+      titleEnglish: 'Salawat Tasbih',
+      descUrdu: 'ڈیجیٹل کاؤنٹر اور فضائل',
+      descHindi: 'डिजिटल काउंटर और फ़ज़ीलत',
+      descEnglish: 'Digital counter with rewards',
+      icon: Heart,
+      color: '#e11d48',
+      bg: 'rgba(225, 29, 72, 0.08)'
+    },
+    {
+      id: 'quiz',
+      titleUrdu: 'سیرت النبی ﷺ کوئز',
+      titleHindi: 'सीरत-उन-नबी ﷺ क्विज़',
+      titleEnglish: 'Seerat Quiz',
+      descUrdu: '۵۰+ سوالات و جوابات',
+      descHindi: '50+ प्रश्न और उत्तर',
+      descEnglish: '50+ interactive questions',
+      icon: HelpCircle,
+      color: '#d97706',
+      bg: 'rgba(217, 119, 6, 0.08)'
+    },
+    {
+      id: 'timeline',
+      titleUrdu: 'تاریخی ٹائم لائن',
+      titleHindi: 'ऐतिहासिक टाइमलाइन',
+      titleEnglish: 'Seerat Timeline',
+      descUrdu: 'مکی اور مدنی اہم واقعات',
+      descHindi: 'मक्की व मदनी मुख्य घटनाएं',
+      descEnglish: 'Makki & Madani milestones',
+      icon: Clock,
+      color: '#7c3aed',
+      bg: 'rgba(124, 58, 237, 0.08)'
+    },
+    {
+      id: 'shamail',
+      titleUrdu: 'شمائل و خصائل نبوی ﷺ',
+      titleHindi: 'शमाइल व ख़साइल ﷺ',
+      titleEnglish: 'Shamail Explorer',
+      descUrdu: 'مقدس اوصاف اور اخلاقِ مبارکہ',
+      descHindi: 'पवित्र गुण और मुबारक अख़्लाक़',
+      descEnglish: 'Noble character and traits',
+      icon: Sparkles,
+      color: '#059669',
+      bg: 'rgba(5, 150, 105, 0.08)'
+    }
+  ];
+
   return (
-    <div className="w-full flex flex-col items-center justify-center px-4 pt-3 pb-24 sm:py-6 select-none welcome-dots-bg">
+    <div className="w-full flex flex-col items-center justify-center px-4 pt-3 pb-24 sm:py-8 select-none">
       <div className="w-full max-w-md flex flex-col items-center text-center">
         
+        {/* Top Floating Developer Badge */}
+        <div className="mb-3 inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold shadow-xs border transition-all"
+          style={{
+            backgroundColor: 'var(--bg-surface-elevated)',
+            borderColor: 'var(--border-subtle)',
+            color: 'var(--primary)'
+          }}
+        >
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="tracking-wide">Developed by Mohammad Asim</span>
+        </div>
+
         {/* Iconic Opening Portrait Artwork Card */}
         <div 
-          className="relative w-full max-w-[340px] sm:max-w-[380px] rounded-[28px] overflow-hidden shadow-2xl border-[3px] transition-transform duration-300 hover:scale-[1.01]"
+          className="relative w-full max-w-[340px] sm:max-w-[380px] rounded-3xl overflow-hidden shadow-2xl border-[3px] transition-transform duration-300 hover:scale-[1.01]"
           style={{ borderColor: 'var(--gold)', backgroundColor: 'var(--bg-surface)' }}
         >
           <img 
@@ -50,23 +144,26 @@ export default function WelcomeScreen({
           />
         </div>
 
-        {/* Continue Reading Pill Button */}
+        {/* Primary CTA: Continue Reading Pill Button */}
         <div className="mt-4 w-full max-w-[340px] sm:max-w-[380px]">
           <button
             onClick={onStartReading}
-            className="w-full py-3.5 px-5 rounded-full text-white flex items-center justify-between shadow-lg transition-transform hover:scale-[1.01] active:scale-[0.98] group"
+            type="button"
+            className="w-full py-3.5 px-5 rounded-2xl text-white flex items-center justify-between shadow-lg transition-all hover:scale-[1.01] active:scale-[0.98] group cursor-pointer"
             style={{ 
-              backgroundColor: '#064e3b',
-              boxShadow: '0 8px 24px rgba(6, 78, 59, 0.28)'
+              background: 'linear-gradient(135deg, #064e3b 0%, #065f46 100%)',
+              boxShadow: '0 8px 24px rgba(6, 78, 59, 0.32)'
             }}
           >
             <div className="flex items-center gap-3.5 min-w-0">
-              <BookOpen size={24} className="text-white flex-shrink-0" />
+              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                <BookOpen size={22} className="text-white" />
+              </div>
               <div className="text-left rtl:text-right min-w-0">
-                <div className="font-bold text-sm sm:text-base leading-tight text-white truncate">
+                <div className={`font-bold text-sm sm:text-base leading-tight text-white truncate ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`}>
                   {lang === 'urdu' ? 'مطالعہ جاری رکھیں' : lang === 'hindi' ? 'अध्ययन जारी रखें' : 'Continue Reading'}
                 </div>
-                <div className="text-[11px] sm:text-xs text-emerald-200/90 font-medium truncate mt-0.5" dir="ltr">
+                <div className="text-[11px] sm:text-xs text-emerald-200 font-medium truncate mt-0.5" dir="ltr">
                   {lang === 'urdu' 
                     ? `صفحہ ${currentPage} از ${totalPages}` 
                     : lang === 'hindi' 
@@ -77,8 +174,8 @@ export default function WelcomeScreen({
             </div>
             
             <div 
-              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center flex-shrink-0 transition-transform group-hover:translate-x-0.5"
-              style={{ backgroundColor: '#043629' }}
+              className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1"
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.15)' }}
             >
               <ArrowIcon size={18} className="text-white" />
             </div>
@@ -97,10 +194,10 @@ export default function WelcomeScreen({
           >
             {/* Top row: Title + Completion % */}
             <div className="flex items-center justify-between mb-2 text-xs sm:text-sm">
-              <span className="font-bold" style={{ color: 'var(--text-main)' }}>
-                {lang === 'urdu' ? 'آپ کا مطالعہ ریکارڈ' : lang === 'hindi' ? 'आपकी अध्ययन प्रगति' : 'Your Progress'}
+              <span className={`font-bold ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-main)' }}>
+                {lang === 'urdu' ? 'آپ کا مطالعہ پیشرفت' : lang === 'hindi' ? 'आपकी अध्ययन प्रगति' : 'Your Reading Progress'}
               </span>
-              <span className="font-bold text-emerald-700 dark:text-emerald-400" dir="ltr" style={{ color: 'var(--primary)' }}>
+              <span className="font-bold font-mono text-emerald-700 dark:text-emerald-400" dir="ltr" style={{ color: 'var(--primary)' }}>
                 {completionPercentage}% {lang === 'urdu' ? 'مکمل' : lang === 'hindi' ? 'पूर्ण' : 'Completed'}
               </span>
             </div>
@@ -108,13 +205,13 @@ export default function WelcomeScreen({
             {/* Horizontal Progress Bar */}
             <div 
               className="w-full h-2 rounded-full overflow-hidden mb-3.5"
-              style={{ backgroundColor: 'rgba(0, 0, 0, 0.07)' }}
+              style={{ backgroundColor: 'rgba(0, 0, 0, 0.08)' }}
             >
               <div 
                 className="h-full rounded-full transition-all duration-700"
                 style={{ 
                   width: `${Math.max(completionPercentage, 2)}%`,
-                  backgroundColor: 'var(--primary)' 
+                  background: 'linear-gradient(90deg, var(--primary), var(--gold))' 
                 }}
               />
             </div>
@@ -126,49 +223,137 @@ export default function WelcomeScreen({
             >
               {/* 1. Pages Read */}
               <div className="flex flex-col items-center justify-center text-center px-1">
-                <BookOpen size={18} strokeWidth={1.8} style={{ color: 'var(--text-muted)' }} />
-                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full" dir="ltr" style={{ color: 'var(--text-main)' }}>
-                  {pagesReadCount} / {totalPages}
+                <BookOpen size={16} strokeWidth={2} style={{ color: 'var(--text-muted)' }} />
+                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full font-mono" dir="ltr" style={{ color: 'var(--text-main)' }}>
+                  {pagesReadCount}/{totalPages}
                 </span>
-                <span className="text-[10px] mt-0.5 truncate max-w-full" style={{ color: 'var(--text-muted)' }}>
-                  {lang === 'urdu' ? 'صفحات' : lang === 'hindi' ? 'पृष्ठ' : 'Pages Read'}
+                <span className={`text-[10px] mt-0.5 truncate max-w-full ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-muted)' }}>
+                  {lang === 'urdu' ? 'صفحات' : lang === 'hindi' ? 'पृष्ठ' : 'Pages'}
                 </span>
               </div>
 
               {/* 2. Chapters */}
               <div className="flex flex-col items-center justify-center text-center px-1">
-                <Layers size={18} strokeWidth={1.8} style={{ color: 'var(--text-muted)' }} />
-                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full" dir="ltr" style={{ color: 'var(--text-main)' }}>
-                  {completedChaptersCount} / {totalChapters}
+                <Layers size={16} strokeWidth={2} style={{ color: 'var(--text-muted)' }} />
+                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full font-mono" dir="ltr" style={{ color: 'var(--text-main)' }}>
+                  {completedChaptersCount}/{totalChapters}
                 </span>
-                <span className="text-[10px] mt-0.5 truncate max-w-full" style={{ color: 'var(--text-muted)' }}>
+                <span className={`text-[10px] mt-0.5 truncate max-w-full ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-muted)' }}>
                   {lang === 'urdu' ? 'ابواب' : lang === 'hindi' ? 'अध्याय' : 'Chapters'}
                 </span>
               </div>
 
               {/* 3. Reading Time */}
               <div className="flex flex-col items-center justify-center text-center px-1">
-                <Clock size={18} strokeWidth={1.8} style={{ color: 'var(--text-muted)' }} />
-                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full" dir="ltr" style={{ color: 'var(--text-main)' }}>
+                <Clock size={16} strokeWidth={2} style={{ color: 'var(--text-muted)' }} />
+                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full font-mono" dir="ltr" style={{ color: 'var(--text-main)' }}>
                   {readingTimeText}
                 </span>
-                <span className="text-[10px] mt-0.5 truncate max-w-full" style={{ color: 'var(--text-muted)' }}>
-                  {lang === 'urdu' ? 'مطالعہ وقت' : lang === 'hindi' ? 'समय' : 'Reading Time'}
+                <span className={`text-[10px] mt-0.5 truncate max-w-full ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-muted)' }}>
+                  {lang === 'urdu' ? 'مطالعہ وقت' : lang === 'hindi' ? 'समय' : 'Time'}
                 </span>
               </div>
 
               {/* 4. Completed */}
               <div className="flex flex-col items-center justify-center text-center px-1">
-                <Target size={18} strokeWidth={1.8} style={{ color: 'var(--text-muted)' }} />
-                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full" dir="ltr" style={{ color: 'var(--text-main)' }}>
+                <Target size={16} strokeWidth={2} style={{ color: 'var(--text-muted)' }} />
+                <span className="font-bold text-xs sm:text-sm mt-1.5 truncate max-w-full font-mono" dir="ltr" style={{ color: 'var(--text-main)' }}>
                   {completionPercentage}%
                 </span>
-                <span className="text-[10px] mt-0.5 truncate max-w-full" style={{ color: 'var(--text-muted)' }}>
-                  {lang === 'urdu' ? 'مکمل' : lang === 'hindi' ? 'पूर्ण' : 'Completed'}
+                <span className={`text-[10px] mt-0.5 truncate max-w-full ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-muted)' }}>
+                  {lang === 'urdu' ? 'مکمل' : lang === 'hindi' ? 'पूर्ण' : 'Progress'}
                 </span>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* 6 Key Interactive Tools Section */}
+        <div className="mt-6 w-full max-w-[340px] sm:max-w-[380px]">
+          <div className="flex items-center justify-between mb-3 px-1">
+            <h2 className={`text-xs sm:text-sm font-bold ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--primary)' }}>
+              {lang === 'urdu' ? 'ایپ کے اہم علمی و دینی فیچرز' : lang === 'hindi' ? 'ऐप की मुख्य विशेषताएं व टूल्स' : 'Key Features & Learning Tools'}
+            </h2>
+            <span className="text-[11px] font-medium" style={{ color: 'var(--text-muted)' }}>
+              {features.length} {lang === 'urdu' ? 'فیچرز' : lang === 'hindi' ? 'टूल्स' : 'Tools'}
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2.5 w-full">
+            {features.map((feat) => {
+              const Icon = feat.icon;
+              const title = lang === 'urdu' ? feat.titleUrdu : lang === 'hindi' ? feat.titleHindi : feat.titleEnglish;
+              const desc = lang === 'urdu' ? feat.descUrdu : lang === 'hindi' ? feat.descHindi : feat.descEnglish;
+              return (
+                <button
+                  key={feat.id}
+                  type="button"
+                  onClick={() => onNavigateTab && onNavigateTab(feat.id)}
+                  className="flex flex-col items-start p-3 rounded-2xl border text-left rtl:text-right transition-all hover:scale-[1.02] active:scale-95 shadow-xs group cursor-pointer"
+                  style={{ 
+                    backgroundColor: 'var(--bg-surface)', 
+                    borderColor: 'var(--border-subtle)' 
+                  }}
+                >
+                  <div 
+                    className="w-9 h-9 rounded-xl flex items-center justify-center mb-2.5 transition-transform group-hover:scale-110"
+                    style={{ backgroundColor: feat.bg, color: feat.color }}
+                  >
+                    <Icon size={18} strokeWidth={2.2} />
+                  </div>
+                  <h3 className={`text-xs font-bold leading-tight truncate w-full ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-main)' }}>
+                    {title}
+                  </h3>
+                  <p className={`text-[10px] truncate w-full mt-1 ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`} style={{ color: 'var(--text-muted)' }}>
+                    {desc}
+                  </p>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Daily Spiritual Reflection / Hadith Card */}
+        <div className="mt-5 w-full max-w-[340px] sm:max-w-[380px]">
+          <div 
+            className="w-full p-4 rounded-2xl border text-center shadow-xs relative overflow-hidden"
+            style={{ 
+              backgroundColor: 'var(--bg-surface-elevated)', 
+              borderColor: 'var(--gold)' 
+            }}
+          >
+            <div className="font-arabic text-sm sm:text-base font-bold mb-1.5" style={{ color: 'var(--gold)' }}>
+              صَلَّى اللّٰهُ عَلَيْهِ وَآلِهِ وَسَلَّمَ
+            </div>
+            <p className="text-xs sm:text-[13px] leading-relaxed italic text-gray-700 dark:text-gray-300">
+              {lang === 'urdu'
+                ? '”تم میں سے سب سے بہتر وہ شخص ہے جس کے اخلاق سب سے اچھے ہوں۔“ (صحیح بخاری)'
+                : lang === 'hindi'
+                ? '”तुम में से सबसे उत्तम व्यक्ति वह है जिसका चरित्र सबसे अच्छा हो।“ (सहीह बुख़ारी)'
+                : '“The best among you are those who have the best manners and character.” (Sahih Bukhari)'}
+            </p>
+          </div>
+        </div>
+
+        {/* Dedicated Attribution Footer Card */}
+        <div 
+          className="mt-6 p-4 rounded-2xl border w-full max-w-[340px] sm:max-w-[380px] text-center shadow-xs"
+          style={{ 
+            backgroundColor: 'var(--bg-surface)', 
+            borderColor: 'var(--border-subtle)' 
+          }}
+        >
+          <div className="flex items-center justify-center gap-1.5 text-xs font-bold" style={{ color: 'var(--primary)' }}>
+            <span>🌸</span>
+            <span>Developed by Mohammad Asim</span>
+          </div>
+          <p className="text-[11px] mt-1" style={{ color: 'var(--text-muted)' }}>
+            {lang === 'urdu' 
+              ? 'مبارک سیرتِ مصطفیٰ ﷺ کا ڈیجیٹل علمی ایڈیشن • مکتبۃ المدینہ' 
+              : lang === 'hindi' 
+              ? 'मुबारक सीरत-ए-मुस्तफ़ा ﷺ का डिजिटल अध्ययन संस्करण' 
+              : 'Digital Reading Edition of the Blessed Biography of Prophet Muhammad ﷺ'}
+          </p>
         </div>
 
       </div>

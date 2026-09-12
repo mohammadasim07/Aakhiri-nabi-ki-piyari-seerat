@@ -31,7 +31,7 @@ export default function MobileBottomNav({
     },
     {
       id: 'progress',
-      labelUrdu: 'ریکارڈ',
+      labelUrdu: 'پیشرفت',
       labelHindi: 'प्रगति',
       labelEnglish: 'Progress',
       icon: BarChart3,
@@ -39,7 +39,7 @@ export default function MobileBottomNav({
     },
     {
       id: 'durood',
-      labelUrdu: 'درود',
+      labelUrdu: 'درود پاک',
       labelHindi: 'दुरूद',
       labelEnglish: 'Salawat',
       icon: HeartIcon
@@ -55,7 +55,7 @@ export default function MobileBottomNav({
 
   return (
     <nav 
-      className="mobile-bottom-dock"
+      className="mobile-bottom-dock select-none"
       style={{ 
         position: 'fixed',
         bottom: 0,
@@ -63,64 +63,70 @@ export default function MobileBottomNav({
         right: 0,
         width: '100%',
         zIndex: 50,
-        borderColor: 'var(--border-color)', 
+        borderTop: '1px solid var(--border-color)', 
         backgroundColor: 'var(--bg-surface)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
         paddingTop: '6px',
         paddingBottom: 'max(8px, env(safe-area-inset-bottom))',
-        boxShadow: '0 -4px 16px rgba(0, 0, 0, 0.08)'
+        boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.08)'
       }}
     >
-      <div className="w-full max-w-xl mx-auto flex items-center justify-around">
-      {items.map((item) => {
-        const Icon = item.icon;
-        const isActive = activeTab === item.id;
-        const label = lang === 'urdu' ? item.labelUrdu : lang === 'hindi' ? item.labelHindi : item.labelEnglish;
-        return (
-          <button
-            key={item.id}
-            onClick={() => setActiveTab(item.id)}
-            className="flex-1 flex flex-col items-center justify-center py-1 relative active:scale-95 transition-all"
-            style={{ 
-              color: isActive ? 'var(--primary)' : 'var(--text-muted)',
-              minWidth: 0
-            }}
-          >
-            <div className="relative">
-              <div 
-                className="p-1 rounded-xl transition-all"
-                style={{ 
-                  backgroundColor: isActive ? 'rgba(6, 95, 70, 0.12)' : 'transparent',
-                }}
-              >
-                <Icon 
-                  size={20} 
-                  strokeWidth={isActive ? 2.5 : 1.9} 
-                  style={{ color: isActive ? 'var(--primary)' : 'currentColor' }} 
-                />
-              </div>
-              {item.badge && (
-                <span 
-                  className="absolute text-[9px] font-mono font-bold px-1 rounded-full text-white shadow-xs"
+      <div className="w-full max-w-xl mx-auto flex items-center justify-around px-1">
+        {items.map((item) => {
+          const Icon = item.icon;
+          const isActive = activeTab === item.id;
+          const label = lang === 'urdu' ? item.labelUrdu : lang === 'hindi' ? item.labelHindi : item.labelEnglish;
+          return (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => setActiveTab(item.id)}
+              className="flex-1 flex flex-col items-center justify-center py-1 relative active:scale-95 transition-all cursor-pointer"
+              style={{ 
+                color: isActive ? 'var(--primary)' : 'var(--text-muted)',
+                minWidth: 0
+              }}
+              aria-label={label}
+            >
+              <div className="relative">
+                <div 
+                  className="p-1.5 rounded-xl transition-all"
                   style={{ 
-                    backgroundColor: 'var(--gold)',
-                    top: '-3px',
-                    right: '-7px',
-                    lineHeight: '13px'
+                    backgroundColor: isActive ? 'rgba(6, 95, 70, 0.12)' : 'transparent',
                   }}
                 >
-                  {item.badge}
-                </span>
-              )}
-            </div>
-            <span 
-              className={`text-[10px] mt-0.5 truncate max-w-full ${isActive ? 'font-bold' : 'font-medium'} ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`}
-              style={{ color: isActive ? 'var(--primary)' : 'var(--text-muted)' }}
-            >
-              {label}
-            </span>
-          </button>
-        );
-      })}
+                  <Icon 
+                    size={20} 
+                    strokeWidth={isActive ? 2.5 : 1.9} 
+                    style={{ color: isActive ? 'var(--primary)' : 'currentColor' }} 
+                  />
+                </div>
+                {item.badge && (
+                  <span 
+                    className="absolute text-[8px] font-mono font-bold px-1 rounded-full text-white shadow-xs pointer-events-none"
+                    style={{ 
+                      backgroundColor: 'var(--gold)',
+                      top: '-2px',
+                      right: '-8px',
+                      lineHeight: '12px'
+                    }}
+                  >
+                    {item.badge}
+                  </span>
+                )}
+              </div>
+              <span 
+                className={`text-[10px] mt-0.5 truncate max-w-full leading-tight ${
+                  isActive ? 'font-bold' : 'font-medium'
+                } ${lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''}`}
+                style={{ color: isActive ? 'var(--primary)' : 'var(--text-muted)' }}
+              >
+                {label}
+              </span>
+            </button>
+          );
+        })}
       </div>
     </nav>
   );

@@ -46,7 +46,7 @@ export default function Header({
   const getTitle = () => {
     if (lang === 'urdu') return BOOK_METADATA.titleUrdu;
     if (lang === 'hindi') return BOOK_METADATA.titleHindi;
-    return BOOK_METADATA.titleEnglish;
+    return 'Aakhri Nabi Ki Pyari Seerat';
   };
 
   const getAuthor = () => {
@@ -61,7 +61,7 @@ export default function Header({
     }
     if (lang === 'urdu') return 'اردو ایڈیشن (مکمل 147 صفحات)';
     if (lang === 'hindi') return 'हिन्दी एडिशन (मुकम्मल 147 पृष्ठ)';
-    return 'English Edition (Full 166 Pages)';
+    return 'The Sublime Biography of the Prophet ﷺ';
   };
 
   return (
@@ -144,8 +144,8 @@ export default function Header({
               
               <div className="min-w-0 flex-1">
                 <h1 
-                  className={`text-sm xs:text-base font-bold leading-tight truncate cursor-pointer ${
-                    lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''
+                  className={`text-sm xs:text-base font-bold leading-normal truncate cursor-pointer ${
+                    lang === 'urdu' ? 'font-urdu py-0.5' : lang === 'hindi' ? 'font-hindi' : ''
                   }`}
                   style={{ color: 'var(--primary)' }}
                 >
@@ -270,15 +270,15 @@ export default function Header({
               <img src="/app-logo.png" alt="App Logo" className="w-full h-full object-cover" />
             </div>
             <div className="min-w-0">
-              <h1 
-                className={`text-lg sm:text-xl font-bold leading-tight truncate cursor-pointer ${
-                  lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''
-                }`}
-                style={{ color: 'var(--primary)' }}
-                onClick={() => setActiveTab('home')}
-              >
-                {getTitle()}
-              </h1>
+                <h1 
+                  className={`text-lg font-bold leading-normal truncate cursor-pointer ${
+                    lang === 'urdu' ? 'font-urdu py-0.5' : lang === 'hindi' ? 'font-hindi' : ''
+                  }`}
+                  style={{ color: 'var(--primary)' }}
+                  onClick={() => setActiveTab('home')}
+                >
+                  {getTitle()}
+                </h1>
               <p className="text-xs text-gray-500 dark:text-gray-400 truncate mt-0.5">
                 {getSubTitle()}
               </p>
