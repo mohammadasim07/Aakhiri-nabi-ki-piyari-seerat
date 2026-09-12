@@ -134,25 +134,25 @@ export default function WelcomeScreen({
         </div>
 
         {/* Primary CTA: Continue Reading Pill Button */}
-        <div className="mt-4 w-full max-w-[340px] sm:max-w-[380px]">
+        <div className="mt-4 w-full max-w-[350px] sm:max-w-[390px]">
           <button
             onClick={onStartReading}
             type="button"
-            className="w-full py-3.5 px-5 rounded-2xl text-white flex items-center justify-between shadow-lg transition-all hover:scale-[1.01] active:scale-[0.98] group cursor-pointer"
+            className="w-full min-h-[76px] sm:min-h-[82px] py-4 px-5 sm:px-6 rounded-[28px] text-white flex items-center justify-between shadow-lg transition-all hover:scale-[1.01] active:scale-[0.98] group cursor-pointer"
             style={{ 
               background: 'linear-gradient(135deg, #064e3b 0%, #065f46 100%)',
               boxShadow: '0 8px 24px rgba(6, 78, 59, 0.32)'
             }}
           >
-            <div className="flex items-center gap-3.5 min-w-0">
-              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
-                <BookOpen size={22} className="text-white" />
+            <div className="flex items-center gap-3.5 sm:gap-4 min-w-0 flex-1 overflow-visible">
+              <div className="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                <BookOpen size={24} className="text-white" />
               </div>
-              <div className="text-left rtl:text-right min-w-0">
-                <div className={`font-bold text-sm sm:text-base text-white ${lang === 'urdu' ? 'font-urdu leading-normal py-0.5' : 'leading-tight truncate'}`}>
+              <div className="text-left rtl:text-right min-w-0 flex-1 overflow-visible">
+                <div className={`font-bold text-white text-base sm:text-[17px] ${lang === 'urdu' ? 'font-urdu leading-[2.1] py-0.5' : 'leading-snug truncate'}`}>
                   {lang === 'urdu' ? 'مطالعہ جاری رکھیں' : lang === 'hindi' ? 'अध्ययन जारी रखें' : 'Continue Reading'}
                 </div>
-                <div className="text-[11px] sm:text-xs text-emerald-200 font-medium truncate mt-0.5" dir="ltr">
+                <div className={`text-emerald-200 font-medium text-xs sm:text-[13px] mt-0.5 ${lang === 'urdu' ? 'font-urdu leading-normal' : 'truncate'}`} dir={lang === 'urdu' ? 'rtl' : 'ltr'}>
                   {lang === 'urdu' 
                     ? `صفحہ ${currentPage} از ${totalPages}` 
                     : lang === 'hindi' 
@@ -163,16 +163,16 @@ export default function WelcomeScreen({
             </div>
             
             <div 
-              className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1"
+              className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1"
               style={{ backgroundColor: 'rgba(255, 255, 255, 0.15)' }}
             >
-              <ArrowIcon size={18} className="text-white" />
+              <ArrowIcon size={19} className="text-white" />
             </div>
           </button>
         </div>
 
-        {/* Your Progress Section Card */}
-        <div className="mt-3.5 w-full max-w-[340px] sm:max-w-[380px]">
+        {/* Your Progress Section Card (Comfortable 20px gap below Continue Reading) */}
+        <div className="mt-5 w-full max-w-[350px] sm:max-w-[390px]">
           <div 
             onClick={() => onNavigateTab && onNavigateTab('progress')}
             className="w-full rounded-2xl p-4 border shadow-xs transition-all hover:border-emerald-500/40 cursor-pointer text-left rtl:text-right"
