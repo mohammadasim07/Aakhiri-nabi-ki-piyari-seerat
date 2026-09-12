@@ -142,11 +142,11 @@ export default function Header({
                 <img src="/app-logo.png" alt="App Logo" className="w-full h-full object-cover" />
               </div>
               
-              <div className="min-w-0 flex-1 overflow-visible">
+              <div className="min-w-0 flex-1 overflow-visible py-1">
                 <h1 
                   className={`font-bold cursor-pointer overflow-visible ${
                     lang === 'urdu' 
-                      ? 'font-urdu text-base sm:text-lg leading-relaxed py-0.5' 
+                      ? 'font-urdu text-lg xs:text-xl leading-[2.4] py-1' 
                       : 'text-sm xs:text-base leading-normal truncate'
                   }`}
                   style={{ color: 'var(--primary)' }}
@@ -155,7 +155,7 @@ export default function Header({
                 </h1>
                 <p className={`text-gray-500 dark:text-gray-400 overflow-visible mt-0.5 ${
                   lang === 'urdu' 
-                    ? 'font-urdu text-[11px] leading-normal' 
+                    ? 'font-urdu text-xs xs:text-[13px] leading-[2.0] py-0.5' 
                     : 'text-[10px] sm:text-xs truncate'
                 }`}>
                   {getSubTitle()}
@@ -275,17 +275,17 @@ export default function Header({
             >
               <img src="/app-logo.png" alt="App Logo" className="w-full h-full object-cover" />
             </div>
-            <div className="min-w-0 overflow-visible py-0.5">
+            <div className="min-w-0 overflow-visible py-1">
               <h1 
                 className={`font-bold cursor-pointer overflow-visible ${
-                  lang === 'urdu' ? 'font-urdu py-0.5 leading-relaxed text-xl' : 'text-lg leading-normal truncate'
+                  lang === 'urdu' ? 'font-urdu py-1 leading-[2.4] text-2xl' : 'text-lg leading-normal truncate'
                 }`}
                 style={{ color: 'var(--primary)' }}
                 onClick={() => setActiveTab('home')}
               >
                 {getTitle()}
               </h1>
-              <p className={`text-gray-500 dark:text-gray-400 overflow-visible mt-0.5 ${lang === 'urdu' ? 'font-urdu text-xs leading-normal' : 'text-xs truncate'}`}>
+              <p className={`text-gray-500 dark:text-gray-400 overflow-visible mt-0.5 ${lang === 'urdu' ? 'font-urdu text-sm leading-[2.0] py-0.5' : 'text-xs truncate'}`}>
                 {getSubTitle()}
               </p>
             </div>

@@ -258,17 +258,17 @@ export default function WelcomeScreen({
         </div>
 
         {/* 6 Key Interactive Tools Section */}
-        <div className="mt-6 w-full max-w-[340px] sm:max-w-[380px]">
-          <div className="flex items-center justify-between mb-3 px-1">
-            <h2 className={`text-xs sm:text-sm font-bold ${lang === 'urdu' ? 'font-urdu py-1 leading-relaxed text-sm' : ''}`} style={{ color: 'var(--primary)' }}>
+        <div className="mt-7 w-full max-w-[360px] sm:max-w-[420px]">
+          <div className="flex items-center justify-between mb-3 px-1 overflow-visible py-1">
+            <h2 className={`font-bold overflow-visible ${lang === 'urdu' ? 'font-urdu text-base sm:text-lg py-1.5 leading-[2.4]' : 'text-sm sm:text-base'}`} style={{ color: 'var(--primary)' }}>
               {lang === 'urdu' ? 'ایپ کے اہم علمی و دینی فیچرز' : lang === 'hindi' ? 'ऐप की मुख्य विशेषताएं व टूल्स' : 'Key Features & Learning Tools'}
             </h2>
-            <span className="text-[11px] font-medium" style={{ color: 'var(--text-muted)' }}>
+            <span className={`font-medium ${lang === 'urdu' ? 'font-urdu text-xs leading-[2.0]' : 'text-[11px] sm:text-xs'}`} style={{ color: 'var(--text-muted)' }}>
               {features.length} {lang === 'urdu' ? 'فیچرز' : lang === 'hindi' ? 'टूल्स' : 'Tools'}
             </span>
           </div>
 
-          <div className="grid grid-cols-2 gap-2.5 w-full">
+          <div className="flex flex-col gap-3 w-full">
             {features.map((feat) => {
               const Icon = feat.icon;
               const title = lang === 'urdu' ? feat.titleUrdu : lang === 'hindi' ? feat.titleHindi : feat.titleEnglish;
@@ -278,25 +278,47 @@ export default function WelcomeScreen({
                   key={feat.id}
                   type="button"
                   onClick={() => onNavigateTab && onNavigateTab(feat.id)}
-                  className="flex flex-col items-start p-3 rounded-2xl border text-left rtl:text-right transition-all hover:scale-[1.02] active:scale-95 shadow-xs group cursor-pointer min-h-[110px] justify-between"
+                  className="w-full flex items-center gap-3.5 p-3.5 sm:p-4 rounded-2xl border text-left rtl:text-right transition-all hover:scale-[1.01] active:scale-[0.98] shadow-xs group cursor-pointer"
                   style={{ 
                     backgroundColor: 'var(--bg-surface)', 
                     borderColor: 'var(--border-subtle)' 
                   }}
                 >
                   <div 
-                    className="w-9 h-9 rounded-xl flex items-center justify-center mb-1.5 transition-transform group-hover:scale-110 flex-shrink-0"
+                    className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-105 flex-shrink-0 shadow-xs"
                     style={{ backgroundColor: feat.bg, color: feat.color }}
                   >
-                    <Icon size={18} strokeWidth={2.2} />
+                    <Icon size={22} strokeWidth={2.2} />
                   </div>
-                  <div className="w-full flex-1 flex flex-col justify-center overflow-visible">
-                    <h3 className={`text-xs font-bold leading-normal w-full overflow-visible ${lang === 'urdu' ? 'font-urdu py-0.5 text-[13px]' : 'truncate'}`} style={{ color: 'var(--text-main)' }}>
+                  
+                  <div className="flex-1 min-w-0 overflow-visible py-1">
+                    <h3 
+                      className={`font-bold overflow-visible ${
+                        lang === 'urdu' 
+                          ? 'font-urdu text-base sm:text-lg leading-[2.4] py-0.5' 
+                          : 'text-sm sm:text-base leading-snug'
+                      }`} 
+                      style={{ color: 'var(--text-main)' }}
+                    >
                       {title}
                     </h3>
-                    <p className={`text-[10px] w-full mt-0.5 overflow-visible ${lang === 'urdu' ? 'font-urdu leading-normal text-[11px] py-0.5' : 'truncate'}`} style={{ color: 'var(--text-muted)' }}>
+                    <p 
+                      className={`overflow-visible mt-0.5 ${
+                        lang === 'urdu' 
+                          ? 'font-urdu text-xs sm:text-[13px] leading-[2.0] py-0.5' 
+                          : 'text-xs text-gray-500 dark:text-gray-400'
+                      }`} 
+                      style={{ color: 'var(--text-muted)' }}
+                    >
                       {desc}
                     </p>
+                  </div>
+
+                  <div 
+                    className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 opacity-50 group-hover:opacity-100 transition-opacity"
+                    style={{ color: 'var(--text-muted)' }}
+                  >
+                    <ArrowIcon size={16} />
                   </div>
                 </button>
               );
