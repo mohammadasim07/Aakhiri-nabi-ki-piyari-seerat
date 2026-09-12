@@ -321,16 +321,18 @@ export default function BookReader({
           <ChevronRight size={24} />
         </button>
 
-        {/* Floating Mobile Completion Pill */}
-        <div 
-          className="absolute top-3 z-20 flex items-center gap-2 px-3 py-1 rounded-full glass border shadow-sm text-[11px] font-mono font-medium pointer-events-none"
-          style={{ borderColor: 'var(--border-color)', color: 'var(--text-main)' }}
-        >
-          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: isCurrentRead ? '#10b981' : 'var(--gold)' }} />
-          <span>{completionPercent}% {lang === 'english' ? 'read' : 'مکمل'}</span>
-          <span style={{ color: 'var(--text-muted)' }}>•</span>
-          <span>{currentPage}/{totalPages}</span>
-        </div>
+        {/* Floating Mobile Completion Pill (Single Mode only to avoid Dual Badge overlap) */}
+        {!isDualMode && (
+          <div 
+            className="absolute top-3 z-20 flex items-center gap-2 px-3 py-1 rounded-full glass border shadow-sm text-[11px] font-mono font-medium pointer-events-none"
+            style={{ borderColor: 'var(--border-color)', color: 'var(--text-main)' }}
+          >
+            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: isCurrentRead ? '#10b981' : 'var(--gold)' }} />
+            <span>{completionPercent}% {lang === 'english' ? 'read' : lang === 'hindi' ? 'पूर्ण' : 'مکمل'}</span>
+            <span style={{ color: 'var(--text-muted)' }}>•</span>
+            <span dir="ltr">{currentPage}/{totalPages}</span>
+          </div>
+        )}
 
         {/* Book Display - Single Mode or Dual Mode */}
         <div 
@@ -339,12 +341,19 @@ export default function BookReader({
         >
           {/* Dual Mode: First Page */}
           {isDualMode && (
-            <div className="flex flex-col items-center">
-              <span className="text-xs font-bold mb-1.5 px-2.5 py-0.5 rounded-full" style={{ backgroundColor: 'var(--primary)', color: '#fff' }}>
-                {lang1.toUpperCase()} (Page {getDualPage(lang1)})
-              </span>
+            <div className="flex flex-col items-center w-full md:w-auto">
               <div 
-                className="bg-white rounded-lg overflow-hidden book-page-shadow border max-w-[90vw] md:max-w-[440px] lg:max-w-[490px]"
+                className="text-[11px] sm:text-xs font-bold mb-2 px-3 py-1 rounded-full shadow-xs flex items-center gap-1.5" 
+                style={{ backgroundColor: 'var(--primary)', color: '#fff' }}
+              >
+                <span className={lang1 === 'urdu' ? 'font-urdu' : lang1 === 'hindi' ? 'font-hindi' : ''}>
+                  {lang1 === 'urdu' ? 'اردو ایڈیشن' : lang1 === 'hindi' ? 'हिन्दी एडिशन' : 'English Edition'}
+                </span>
+                <span className="opacity-70">•</span>
+                <span dir="ltr">Page {getDualPage(lang1)}</span>
+              </div>
+              <div 
+                className="bg-white rounded-xl overflow-hidden book-page-shadow border max-w-[92vw] sm:max-w-[420px] md:max-w-[380px] lg:max-w-[460px] transition-all"
                 style={{ borderColor: 'var(--border-color)' }}
               >
                 <img
@@ -359,12 +368,19 @@ export default function BookReader({
 
           {/* Dual Mode: Second Page */}
           {isDualMode && (
-            <div className="flex flex-col items-center">
-              <span className="text-xs font-bold mb-1.5 px-2.5 py-0.5 rounded-full" style={{ backgroundColor: 'var(--gold)', color: '#fff' }}>
-                {lang2.toUpperCase()} (Page {getDualPage(lang2)})
-              </span>
+            <div className="flex flex-col items-center w-full md:w-auto">
               <div 
-                className="bg-white rounded-lg overflow-hidden book-page-shadow border max-w-[90vw] md:max-w-[440px] lg:max-w-[490px]"
+                className="text-[11px] sm:text-xs font-bold mb-2 px-3 py-1 rounded-full shadow-xs flex items-center gap-1.5" 
+                style={{ backgroundColor: 'var(--gold)', color: '#fff' }}
+              >
+                <span className={lang2 === 'urdu' ? 'font-urdu' : lang2 === 'hindi' ? 'font-hindi' : ''}>
+                  {lang2 === 'urdu' ? 'اردو ایڈیشن' : lang2 === 'hindi' ? 'हिन्दी एडिशन' : 'English Edition'}
+                </span>
+                <span className="opacity-70">•</span>
+                <span dir="ltr">Page {getDualPage(lang2)}</span>
+              </div>
+              <div 
+                className="bg-white rounded-xl overflow-hidden book-page-shadow border max-w-[92vw] sm:max-w-[420px] md:max-w-[380px] lg:max-w-[460px] transition-all"
                 style={{ borderColor: 'var(--border-color)' }}
               >
                 <img

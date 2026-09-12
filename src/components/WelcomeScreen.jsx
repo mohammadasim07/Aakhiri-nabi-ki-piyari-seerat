@@ -135,6 +135,14 @@ export default function WelcomeScreen({
             <p className="text-[10px] sm:text-[11px] italic font-serif text-gray-700 dark:text-gray-800 mt-1">
               “A life of mercy for all humanity”
             </p>
+
+            <div className="mt-1.5 flex items-center gap-2 opacity-85">
+              <span className="h-px w-5 bg-emerald-800/30" />
+              <span className="text-[8px] sm:text-[9px] font-mono tracking-widest text-[#064e3b] font-bold uppercase">
+                DEVELOPED BY MOHAMMAD ASIM
+              </span>
+              <span className="h-px w-5 bg-emerald-800/30" />
+            </div>
           </div>
         </div>
 
@@ -267,7 +275,7 @@ export default function WelcomeScreen({
               <span>{lang === 'urdu' ? 'ایپ کے اہم فیچرز' : lang === 'hindi' ? 'ऐप की मुख्य विशेषताएं' : 'Key Features & Interactive Tools'}</span>
             </div>
             <span className="text-[11px] font-medium" style={{ color: 'var(--text-muted)' }}>
-              {totalPages} {lang === 'english' ? 'Pages' : 'صفحات'}
+              {totalPages} {lang === 'english' ? 'Pages' : lang === 'hindi' ? 'पृष्ठ' : 'صفحات'}
             </span>
           </div>
 

@@ -31,8 +31,8 @@ export default function Header({
   onOpenSearch,
   onOpenBookmarks,
   onOpenDownload,
-  bookmarkCount,
-  completionPercentage,
+  bookmarkCount = 0,
+  completionPercentage = 0,
   isOffline,
   canInstall,
   onInstallApp
@@ -42,65 +42,6 @@ export default function Header({
     else if (theme === 'sepia') setTheme('dark');
     else setTheme('light');
   };
-
-  const navItems = [
-    { 
-      id: 'home', 
-      labelUrdu: 'صفحہ اول', 
-      labelHindi: 'मुख्य पृष्ठ', 
-      labelEnglish: 'Opening Page',
-      icon: Sparkles 
-    },
-    { 
-      id: 'reader', 
-      labelUrdu: 'کتاب کا مطالعہ', 
-      labelHindi: 'किताब का अध्ययन', 
-      labelEnglish: 'Book Reader',
-      icon: BookOpen 
-    },
-    { 
-      id: 'progress', 
-      labelUrdu: `مطالعہ ریکارڈ (${completionPercentage}%)`, 
-      labelHindi: `अध्ययन रिकॉर्ड (${completionPercentage}%)`, 
-      labelEnglish: `Progress (${completionPercentage}%)`, 
-      icon: BarChart3 
-    },
-    { 
-      id: 'chapters', 
-      labelUrdu: 'تمام ابواب', 
-      labelHindi: 'अध्याय सूची', 
-      labelEnglish: '13 Chapters',
-      icon: Layers 
-    },
-    { 
-      id: 'timeline', 
-      labelUrdu: 'سیرت ٹائم لائن', 
-      labelHindi: 'सीरत टाइमलाइन', 
-      labelEnglish: 'Timeline',
-      icon: Clock 
-    },
-    { 
-      id: 'shamail', 
-      labelUrdu: 'شمائلِ مصطفےٰ', 
-      labelHindi: 'शमाइले मुस्तफ़ा', 
-      labelEnglish: 'Shamail',
-      icon: Sparkles 
-    },
-    { 
-      id: 'quiz', 
-      labelUrdu: 'سیرت کوئز', 
-      labelHindi: 'सीरत क्विज़', 
-      labelEnglish: 'Quiz',
-      icon: HelpCircle 
-    },
-    { 
-      id: 'durood', 
-      labelUrdu: 'درود شریف', 
-      labelHindi: 'दुरूद शरीफ', 
-      labelEnglish: 'Salawat',
-      icon: HeartIcon 
-    }
-  ];
 
   const getTitle = () => {
     if (lang === 'urdu') return BOOK_METADATA.titleUrdu;
@@ -125,70 +66,139 @@ export default function Header({
 
   return (
     <header className="sticky top-0 z-40 glass border-b transition-colors duration-200" style={{ borderColor: 'var(--border-color)' }}>
+      {/* 1. Subtle Professional Top Branding Micro-Bar */}
+      <div 
+        className="w-full border-b py-1 px-3 sm:px-4 text-xs transition-colors"
+        style={{ 
+          borderColor: 'var(--border-subtle)', 
+          backgroundColor: 'var(--bg-surface-elevated)' 
+        }}
+      >
+        <div className="container mx-auto flex items-center justify-between">
+          {/* Subtle Pill Branding */}
+          <div className="flex items-center gap-1.5">
+            <span 
+              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-medium tracking-wide border transition-all"
+              style={{ 
+                backgroundColor: 'rgba(6, 95, 70, 0.06)', 
+                borderColor: 'rgba(6, 95, 70, 0.18)', 
+                color: 'var(--primary)' 
+              }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Developed by Mohammad Asim
+            </span>
+          </div>
 
-      {/* Main Navigation Bar */}
-      <div className="container mx-auto px-3 sm:px-4 py-2 sm:py-3">
+          {/* Right Utility Micro-Badges: Offline, Bookmarks, Downloads */}
+          <div className="flex items-center gap-1 sm:gap-2 text-xs">
+            {isOffline && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30">
+                <WifiOff size={10} />
+                <span className="hidden xs:inline">{lang === 'english' ? 'Offline' : 'آف لائن'}</span>
+              </span>
+            )}
+
+            {/* Bookmarks Counter */}
+            <button
+              onClick={onOpenBookmarks}
+              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-[11px]"
+              title="Bookmarks / محفوظ صفحات"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              <Bookmark size={12} style={{ color: 'var(--gold)' }} />
+              <span className="font-mono">{bookmarkCount > 0 ? bookmarkCount : 0}</span>
+            </button>
+
+            {/* Offline Storage & PDFs Modal */}
+            <button
+              onClick={onOpenDownload}
+              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-[11px]"
+              title="Offline App Storage & Original PDFs"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              <Download size={12} />
+              <span className="hidden xs:inline">{lang === 'english' ? 'Downloads' : lang === 'hindi' ? 'डाउनलोड' : 'ڈاؤنلوڈ'}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. Main Navigation Bar */}
+      <div className="container mx-auto px-3 sm:px-4 py-2 sm:py-2.5">
         {/* Mobile View: Two Rows */}
         <div className="flex sm:hidden flex-col gap-2">
           {/* Row 1: Brand Title + Search + Theme */}
-          <div className="flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2 min-w-0 cursor-pointer" onClick={() => setActiveTab('home')}>
+          <div className="flex items-center justify-between gap-2.5">
+            <div 
+              className="flex items-center gap-2.5 min-w-0 flex-1 cursor-pointer" 
+              onClick={() => setActiveTab('home')}
+            >
               <div 
-                className="w-9 h-9 rounded-xl flex items-center justify-center shadow-sm flex-shrink-0 overflow-hidden border"
+                className="w-10 h-10 rounded-xl flex items-center justify-center shadow-xs flex-shrink-0 overflow-hidden border transition-transform active:scale-95"
                 style={{ borderColor: 'var(--gold)', backgroundColor: 'var(--bg-surface)' }}
                 title="Opening Page / صفحہ اول"
               >
                 <img src="/app-logo.png" alt="App Logo" className="w-full h-full object-cover" />
               </div>
-              <div className="min-w-0">
+              
+              <div className="min-w-0 flex-1">
                 <h1 
-                  className={`text-sm font-bold leading-tight truncate cursor-pointer ${
+                  className={`text-sm xs:text-base font-bold leading-tight truncate cursor-pointer ${
                     lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''
                   }`}
                   style={{ color: 'var(--primary)' }}
                 >
                   {getTitle()}
                 </h1>
-                <p className="text-[10px] truncate" style={{ color: 'var(--text-muted)' }}>
+                <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 truncate mt-0.5">
                   {getSubTitle()}
                 </p>
               </div>
             </div>
 
+            {/* Actions: Consistent 40x40 Touch Targets */}
             <div className="flex items-center gap-1.5 flex-shrink-0">
               <button
                 onClick={onOpenSearch}
-                className="p-1.5 rounded-lg border transition-all"
-                style={{ backgroundColor: 'var(--bg-surface-elevated)', borderColor: 'var(--border-color)' }}
+                className="w-10 h-10 rounded-xl border flex items-center justify-center transition-all hover:border-emerald-500 active:scale-95"
+                style={{ backgroundColor: 'var(--bg-surface-elevated)', borderColor: 'var(--border-color)', color: 'var(--text-main)' }}
                 title="Search / تلاش کریں"
+                aria-label="Search"
               >
-                <Search size={16} />
+                <Search size={18} />
               </button>
 
               <button
                 onClick={toggleTheme}
-                className="p-1.5 rounded-lg border transition-all"
+                className="w-10 h-10 rounded-xl border flex items-center justify-center transition-all hover:scale-105 active:scale-95"
                 style={{ backgroundColor: 'var(--bg-surface-elevated)', borderColor: 'var(--border-color)' }}
                 title={`Switch Theme (${theme})`}
+                aria-label="Toggle Theme"
               >
-                {theme === 'light' && <Coffee size={16} style={{ color: '#854d0e' }} />}
-                {theme === 'sepia' && <Moon size={16} style={{ color: 'var(--primary)' }} />}
-                {theme === 'dark' && <Sun size={16} style={{ color: 'var(--gold)' }} />}
+                {theme === 'light' && <Coffee size={18} style={{ color: '#854d0e' }} />}
+                {theme === 'sepia' && <Moon size={18} style={{ color: 'var(--primary)' }} />}
+                {theme === 'dark' && <Sun size={18} style={{ color: 'var(--gold)' }} />}
               </button>
             </div>
           </div>
 
-          {/* Row 2: Full Width Segmented Language Switcher */}
+          {/* Row 2: Segmented Language Switcher */}
           <div 
-            className="flex items-center p-1 rounded-xl border text-xs font-semibold w-full"
+            className="flex items-center p-1 rounded-xl border text-xs font-semibold w-full shadow-xs"
             style={{ backgroundColor: 'var(--bg-surface-elevated)', borderColor: 'var(--border-color)' }}
           >
             <button
               onClick={() => { setLang('urdu'); setIsDualMode(false); }}
-              className={`flex-1 py-1 rounded-lg text-center transition-all ${lang === 'urdu' && !isDualMode ? 'shadow-sm font-bold' : ''}`}
+              className={`flex-1 py-1.5 rounded-lg text-center transition-all font-urdu ${
+                lang === 'urdu' && !isDualMode 
+                  ? 'shadow-sm font-bold text-white' 
+                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+              }`}
               style={{
                 backgroundColor: lang === 'urdu' && !isDualMode ? 'var(--primary)' : 'transparent',
-                color: lang === 'urdu' && !isDualMode ? '#ffffff' : 'var(--text-muted)',
+                color: lang === 'urdu' && !isDualMode ? '#ffffff' : undefined,
+                lineHeight: '1.4'
               }}
             >
               اردو
@@ -196,10 +206,15 @@ export default function Header({
 
             <button
               onClick={() => { setLang('hindi'); setIsDualMode(false); }}
-              className={`flex-1 py-1 rounded-lg text-center transition-all ${lang === 'hindi' && !isDualMode ? 'shadow-sm font-bold' : ''}`}
+              className={`flex-1 py-1.5 rounded-lg text-center transition-all font-hindi ${
+                lang === 'hindi' && !isDualMode 
+                  ? 'shadow-sm font-bold text-white' 
+                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+              }`}
               style={{
                 backgroundColor: lang === 'hindi' && !isDualMode ? 'var(--primary)' : 'transparent',
-                color: lang === 'hindi' && !isDualMode ? '#ffffff' : 'var(--text-muted)',
+                color: lang === 'hindi' && !isDualMode ? '#ffffff' : undefined,
+                lineHeight: '1.4'
               }}
             >
               हिन्दी
@@ -207,10 +222,15 @@ export default function Header({
 
             <button
               onClick={() => { setLang('english'); setIsDualMode(false); }}
-              className={`flex-1 py-1 rounded-lg text-center transition-all ${lang === 'english' && !isDualMode ? 'shadow-sm font-bold' : ''}`}
+              className={`flex-1 py-1.5 rounded-lg text-center transition-all ${
+                lang === 'english' && !isDualMode 
+                  ? 'shadow-sm font-bold text-white' 
+                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+              }`}
               style={{
                 backgroundColor: lang === 'english' && !isDualMode ? 'var(--primary)' : 'transparent',
-                color: lang === 'english' && !isDualMode ? '#ffffff' : 'var(--text-muted)',
+                color: lang === 'english' && !isDualMode ? '#ffffff' : undefined,
+                lineHeight: '1.4'
               }}
             >
               English
@@ -218,23 +238,28 @@ export default function Header({
 
             <button
               onClick={() => setIsDualMode(!isDualMode)}
-              className={`px-2 py-1 rounded-lg flex items-center justify-center gap-1 transition-all ${isDualMode ? 'shadow-sm font-bold' : ''}`}
+              className={`px-3 py-1.5 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
+                isDualMode 
+                  ? 'shadow-sm font-bold text-white' 
+                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+              }`}
               style={{
                 backgroundColor: isDualMode ? 'var(--gold)' : 'transparent',
-                color: isDualMode ? '#ffffff' : 'var(--text-muted)',
+                color: isDualMode ? '#ffffff' : undefined,
+                lineHeight: '1.4'
               }}
-              title="Compare side-by-side"
+              title="Compare Urdu + English side-by-side"
             >
-              <SplitSquareVertical size={13} />
-              <span className="text-[11px]">Dual</span>
+              <SplitSquareVertical size={14} className={isDualMode ? 'text-white' : 'text-amber-600 dark:text-amber-400'} />
+              <span className="text-[11px] font-bold">Dual <span className="opacity-80 text-[10px] hidden xs:inline">(UR+EN)</span></span>
             </button>
           </div>
         </div>
 
         {/* Desktop View: Single Row */}
-        <div className="hidden sm:flex items-center justify-between gap-3">
+        <div className="hidden sm:flex items-center justify-between gap-4">
           {/* Title & Brand */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 min-w-0">
             <div 
               className="w-11 h-11 rounded-xl flex items-center justify-center shadow-md cursor-pointer overflow-hidden border-2 flex-shrink-0 transition-transform hover:scale-105"
               style={{ borderColor: 'var(--gold)', backgroundColor: 'var(--bg-surface)' }}
@@ -243,9 +268,9 @@ export default function Header({
             >
               <img src="/app-logo.png" alt="App Logo" className="w-full h-full object-cover" />
             </div>
-            <div>
+            <div className="min-w-0">
               <h1 
-                className={`text-lg sm:text-xl font-bold leading-tight cursor-pointer ${
+                className={`text-lg sm:text-xl font-bold leading-tight truncate cursor-pointer ${
                   lang === 'urdu' ? 'font-urdu' : lang === 'hindi' ? 'font-hindi' : ''
                 }`}
                 style={{ color: 'var(--primary)' }}
@@ -253,25 +278,27 @@ export default function Header({
               >
                 {getTitle()}
               </h1>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+              <p className="text-xs text-gray-500 dark:text-gray-400 truncate mt-0.5">
                 {getSubTitle()}
               </p>
             </div>
           </div>
 
-          {/* Center / Right Tools */}
-          <div className="flex items-center gap-2">
-            {/* Trilingual Switcher (Urdu, Hindi, English) */}
+          {/* Center / Right Tools: Language Selector + Actions */}
+          <div className="flex items-center gap-2.5 flex-shrink-0">
+            {/* Trilingual & Dual Switcher */}
             <div 
-              className="flex items-center p-1 rounded-xl border text-xs font-semibold"
+              className="flex items-center p-1 rounded-xl border text-xs font-semibold shadow-xs"
               style={{ backgroundColor: 'var(--bg-surface-elevated)', borderColor: 'var(--border-color)' }}
             >
               <button
                 onClick={() => { setLang('urdu'); setIsDualMode(false); }}
-                className={`px-2.5 py-1.5 rounded-lg transition-all ${lang === 'urdu' && !isDualMode ? 'shadow-sm font-bold' : ''}`}
+                className={`px-3 py-1.5 rounded-lg transition-all font-urdu ${
+                  lang === 'urdu' && !isDualMode ? 'shadow-sm font-bold text-white' : 'text-gray-600 dark:text-gray-300'
+                }`}
                 style={{
                   backgroundColor: lang === 'urdu' && !isDualMode ? 'var(--primary)' : 'transparent',
-                  color: lang === 'urdu' && !isDualMode ? '#ffffff' : 'var(--text-muted)',
+                  color: lang === 'urdu' && !isDualMode ? '#ffffff' : undefined,
                 }}
               >
                 اردو
@@ -279,10 +306,12 @@ export default function Header({
 
               <button
                 onClick={() => { setLang('hindi'); setIsDualMode(false); }}
-                className={`px-2.5 py-1.5 rounded-lg transition-all ${lang === 'hindi' && !isDualMode ? 'shadow-sm font-bold' : ''}`}
+                className={`px-3 py-1.5 rounded-lg transition-all font-hindi ${
+                  lang === 'hindi' && !isDualMode ? 'shadow-sm font-bold text-white' : 'text-gray-600 dark:text-gray-300'
+                }`}
                 style={{
                   backgroundColor: lang === 'hindi' && !isDualMode ? 'var(--primary)' : 'transparent',
-                  color: lang === 'hindi' && !isDualMode ? '#ffffff' : 'var(--text-muted)',
+                  color: lang === 'hindi' && !isDualMode ? '#ffffff' : undefined,
                 }}
               >
                 हिन्दी
@@ -290,36 +319,40 @@ export default function Header({
 
               <button
                 onClick={() => { setLang('english'); setIsDualMode(false); }}
-                className={`px-2.5 py-1.5 rounded-lg transition-all ${lang === 'english' && !isDualMode ? 'shadow-sm font-bold' : ''}`}
+                className={`px-3 py-1.5 rounded-lg transition-all ${
+                  lang === 'english' && !isDualMode ? 'shadow-sm font-bold text-white' : 'text-gray-600 dark:text-gray-300'
+                }`}
                 style={{
                   backgroundColor: lang === 'english' && !isDualMode ? 'var(--primary)' : 'transparent',
-                  color: lang === 'english' && !isDualMode ? '#ffffff' : 'var(--text-muted)',
+                  color: lang === 'english' && !isDualMode ? '#ffffff' : undefined,
                 }}
               >
                 English
               </button>
 
-              {/* Dual Mode Toggle */}
               <button
                 onClick={() => setIsDualMode(!isDualMode)}
-                className={`px-2 py-1.5 rounded-lg flex items-center gap-1 transition-all ${isDualMode ? 'shadow-sm font-bold' : ''}`}
+                className={`px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all ${
+                  isDualMode ? 'shadow-sm font-bold text-white' : 'text-gray-600 dark:text-gray-300'
+                }`}
                 style={{
                   backgroundColor: isDualMode ? 'var(--gold)' : 'transparent',
-                  color: isDualMode ? '#ffffff' : 'var(--text-muted)',
+                  color: isDualMode ? '#ffffff' : undefined,
                 }}
-                title="Compare side-by-side"
+                title="Compare Urdu + English side-by-side"
               >
-                <SplitSquareVertical size={14} />
-                <span>Dual</span>
+                <SplitSquareVertical size={14} className={isDualMode ? 'text-white' : 'text-amber-600 dark:text-amber-400'} />
+                <span>Dual (UR+EN)</span>
               </button>
             </div>
 
             {/* Search Trigger */}
             <button
               onClick={onOpenSearch}
-              className="p-2.5 rounded-xl border transition-all hover:border-emerald-500"
-              style={{ backgroundColor: 'var(--bg-surface-elevated)', borderColor: 'var(--border-color)' }}
+              className="w-10 h-10 rounded-xl border flex items-center justify-center transition-all hover:border-emerald-500 active:scale-95"
+              style={{ backgroundColor: 'var(--bg-surface-elevated)', borderColor: 'var(--border-color)', color: 'var(--text-main)' }}
               title="Search / تلاش کریں"
+              aria-label="Search"
             >
               <Search size={18} />
             </button>
@@ -327,9 +360,10 @@ export default function Header({
             {/* Theme Selector */}
             <button
               onClick={toggleTheme}
-              className="p-2.5 rounded-xl border transition-all hover:scale-105"
+              className="w-10 h-10 rounded-xl border flex items-center justify-center transition-all hover:scale-105 active:scale-95"
               style={{ backgroundColor: 'var(--bg-surface-elevated)', borderColor: 'var(--border-color)' }}
               title={`Switch Theme (${theme})`}
+              aria-label="Toggle Theme"
             >
               {theme === 'light' && <Coffee size={18} style={{ color: '#854d0e' }} />}
               {theme === 'sepia' && <Moon size={18} style={{ color: 'var(--primary)' }} />}
@@ -338,15 +372,6 @@ export default function Header({
           </div>
         </div>
       </div>
-
     </header>
-  );
-}
-
-function HeartIcon({ size = 16, style }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={style}>
-      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-    </svg>
   );
 }
