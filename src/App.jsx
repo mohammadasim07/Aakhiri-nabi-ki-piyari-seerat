@@ -254,7 +254,7 @@ export default function App() {
       )}
 
       {/* Main App Content Body */}
-      <main className="flex-1 flex flex-col pb-16 sm:pb-0">
+      <main className="flex-1 flex flex-col pb-16">
         {activeTab === 'home' && (
           <WelcomeScreen
             onStartReading={() => setActiveTab('reader')}

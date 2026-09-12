@@ -55,7 +55,7 @@ export default function MobileBottomNav({
 
   return (
     <nav 
-      className="mobile-bottom-dock sm:hidden"
+      className="mobile-bottom-dock"
       style={{ 
         position: 'fixed',
         bottom: 0,
@@ -63,9 +63,6 @@ export default function MobileBottomNav({
         right: 0,
         width: '100%',
         zIndex: 50,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-around',
         borderColor: 'var(--border-color)', 
         backgroundColor: 'var(--bg-surface)',
         paddingTop: '6px',
@@ -73,6 +70,7 @@ export default function MobileBottomNav({
         boxShadow: '0 -4px 16px rgba(0, 0, 0, 0.08)'
       }}
     >
+      <div className="w-full max-w-xl mx-auto flex items-center justify-around">
       {items.map((item) => {
         const Icon = item.icon;
         const isActive = activeTab === item.id;
@@ -123,6 +121,7 @@ export default function MobileBottomNav({
           </button>
         );
       })}
+      </div>
     </nav>
   );
 }

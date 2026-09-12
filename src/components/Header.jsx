@@ -384,32 +384,6 @@ export default function Header({
         </div>
       </div>
 
-      {/* Tabs Navigation (Desktop only: on mobile the fixed bottom dock is used) */}
-      <div className="border-t hidden sm:block" style={{ borderColor: 'var(--border-color)' }}>
-        <div className="container mx-auto px-4 flex items-center gap-1 sm:gap-2 overflow-x-auto py-1 scrollbar-none">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeTab === item.id;
-            const label = lang === 'urdu' ? item.labelUrdu : lang === 'hindi' ? item.labelHindi : item.labelEnglish;
-            return (
-              <button
-                key={item.id}
-                onClick={() => setActiveTab(item.id)}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all ${
-                  isActive ? 'shadow-sm font-bold' : 'hover:bg-black/5 dark:hover:bg-white/5'
-                }`}
-                style={{
-                  backgroundColor: isActive ? 'var(--primary)' : 'transparent',
-                  color: isActive ? '#ffffff' : 'var(--text-main)',
-                }}
-              >
-                <Icon size={16} style={{ color: isActive ? '#ffffff' : 'var(--gold)' }} />
-                <span>{label}</span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
     </header>
   );
 }
