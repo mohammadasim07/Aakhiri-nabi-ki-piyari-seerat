@@ -263,6 +263,8 @@ export default function App() {
             setLang={setLang}
             onNavigateTab={(tab) => setActiveTab(tab)}
             completionPercentage={progressStats.percentage}
+            progressStats={progressStats}
+            readingStats={readingStats}
             canInstall={!!deferredInstallPrompt}
             onInstallApp={handleInstallApp}
             onOpenDownload={() => setIsDownloadOpen(true)}
